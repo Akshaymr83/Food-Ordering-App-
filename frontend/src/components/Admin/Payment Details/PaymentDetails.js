@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import NAV from '../../Navbar/NAV';
 import Sidebar from '../Sidebar/Sidebar';
+import AdminNav from '../../Navbar/AdminNav';
 
 function PaymentDetails() {
   const [payments, setPayments] = useState([]);
@@ -16,7 +17,7 @@ function PaymentDetails() {
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
-     <div>  <NAV/></div>
+      <div>  <AdminNav/></div>
      <div><Sidebar/></div>
         <h1>Payment Details</h1>
         

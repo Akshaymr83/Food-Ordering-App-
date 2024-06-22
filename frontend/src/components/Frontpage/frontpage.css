@@ -325,6 +325,23 @@ header {
 
 
 }
+@media (max-width: 992px) {
+  
+.destination__card img {
+  border-radius: 1rem;
+  object-fit: cover;
+  height: 350px;
+  width: 200px;
+  border: 2px solid white;
+
+}
+.destination__details {
+
+width: 200px;
+padding: 0;
+left: 38%;
+}
+}
 
 /* //////////////////////////////////////////GALLERy////////////////////////////////// */
 .gallary {
@@ -463,7 +480,37 @@ header {
   transform: scale(1.1);
 }
 
+@media screen and (max-width: 1000px) {
 
+.gallary__container {
+  display: grid;
+  grid-template-columns: repeat(2);
+  gap: 2rem;
+  width: 59%;
+  padding-top: 15%;
+  padding-bottom: 20%;
+}
+}
+@media (max-width: 992px) {
+  
+  .gallary__container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    width: 59%;
+    padding-top: 15%;
+    padding-bottom: 20%;
+  }
+  .gallary__col img {
+    border-radius: 1rem;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin-left: 2rem;
+  
+    object-fit: contain;
+  }
+  
+  }
 /* //////////////////////////////////////////////MENU */
 .menu {
   width: 100%;
@@ -626,6 +673,7 @@ header {
   height: 100vh;
 }
 
+
 /* ///////////////////////////////////////////////////////////OUR TEAM  */
 
 
@@ -728,6 +776,7 @@ header {
   transition: 0.4s;
   overflow: hidden;
   visibility: hidden;
+  transition:  ease-out;
 }
 
 .team .team_box .profile:hover .info {
@@ -735,7 +784,8 @@ header {
   visibility: visible;
   overflow-y:initial;
   position:absolute;
-  transition: 0.5s ease-in-out;
+  
+
 }
 
 .team .team_box .profile .info .name {

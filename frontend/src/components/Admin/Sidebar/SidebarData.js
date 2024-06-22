@@ -4,6 +4,12 @@ import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
  const SidebarData  = [
+  {
+    title: 'Order Details',
+    path: '/order/id',
+    icon: <IoIcons.IoIosPaper />,
+    cName: 'nav-text'
+  },
 
  
   {

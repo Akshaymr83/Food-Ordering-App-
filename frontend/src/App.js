@@ -26,24 +26,33 @@
 // import OrdersPage from './components/Admin/Order/Order.js';
 // import AdminDashboard from './components/Admin/Order/Order.js';
 // import OrderHistory from './components/OrderHistory.js';
+// import Menu from './components/Frontpage/Menu.js';
+// import AdminOrder from './components/Admin/Order/Order.js';
+// import PaymentForm from './components/Payment/Payment.js';
+// import PaymentPage from './components/Payment/Payment.js';
 
 // function App() {
-//   const [userId, setUserId] = useState(null); 
-//   const id = '';
+//   const [cartItems, setCartItems] = useState([]);
+//   const [userId, setUserId] = useState(null);
+//   const [selectedCategory, setSelectedCategory] = useState("All");
+//   const addToCart = (food) => {
+//     setCartItems([...cartItems, food]);
+//   };
+//   const total = 0;
 //   return (
 //     <div className="App">
 //       <Router>
 //         <Routes>
 //           <Route path='/' element={<Signup/>} />
 //           <Route path='/login' element={<Login/>} />
-//           <Route path='/frontpage/:id' element={<Frontpage />} />
-          
-//           {/* Routes for User */}
-//           <Route path='/cart/:id' element={<Ncart />} />
-//           <Route path='/reviewCard' element={<Review/>} />
+//           <Route path='/frontpage/:id' element={<Frontpage cartItems={cartItems}/>} />
+//           <Route path='/menu' element={<Menu selectedCategory={selectedCategory} addToCart={addToCart}  userId={userId}/>} />
+//           {/* Pass addToCart function to Ncart component */}
+//           <Route path='/cart/:id' element={<Ncart cartItems={cartItems} addToCart={addToCart} />} />
+        
 //           <Route path="/payment/:id" element={<Payment/>} />
-
-//           {/* Routes for Admin */}
+          
+         
 //           <Route path='/admin/:id' element={<Admin/>} />
 //           <Route path='/category' element={<Category/>} />
 //           <Route path='/categoryTable' element={<CategoryTable/>} />
@@ -54,10 +63,10 @@
 //           <Route path='/food' element={<FoodForm/>} />
 //           <Route path='/foodTable' element={<FoodTable/>} />
 //           <Route path='/foodUpdate/:id' element={<FoodUpdate/>} />
-//           <Route path='/order' element={<Order/>} />
-//           <Route path='/orders' element={<AdminDashboard/>} />
+//           <Route path='/order/:id' element={<AdminOrder cartItems={cartItems} addToCart={addToCart} />} />
+//           {/* <Route path='/orders' element={<AdminDashboard/>} /> */}
 //           <Route path='/paymentDetails' element={<PaymentDetails />} />
-//           <Route path='/ordersPage/:id' element={<OrdersPage/>}/>
+//           {/* <Route path='/ordersPage/:id' element={<OrdersPage/>}/> */}
 //           <Route path='/orderhistory/:id' element={<OrderHistory/>}/>
 //         </Routes>
 //       </Router>
@@ -66,6 +75,27 @@
 // }
 
 // export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import React, { useState } from 'react';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -96,41 +126,41 @@
 // import AdminDashboard from './components/Admin/Order/Order.js';
 // import OrderHistory from './components/OrderHistory.js';
 // import Menu from './components/Frontpage/Menu.js';
+// import AdminOrder from './components/Admin/Order/Order.js';
+// import PaymentForm from './components/Payment/Payment.js';
+// import PaymentPage from './components/Payment/Payment.js';
 
 // function App() {
 //   const [cartItems, setCartItems] = useState([]);
-
+//   const [userId, setUserId] = useState(null);
+//   const [selectedCategory, setSelectedCategory] = useState("All");
 //   const addToCart = (food) => {
 //     setCartItems([...cartItems, food]);
 //   };
-
+//   const total = 0;
 //   return (
 //     <div className="App">
 //       <Router>
 //         <Routes>
-//           <Route path='/' element={<Signup/>} />
-//           <Route path='/login' element={<Login/>} />
-//           <Route path='/frontpage/:id' element={<Frontpage />} />
-//           <Route path='/menu' element={<Menu addToCart={addToCart} />} />
-//           {/* Pass addToCart function to Ncart component */}
+//           <Route path='/' element={<Signup />} />
+//           <Route path='/login' element={<Login />} />
+//           <Route path='/frontpage/:id' element={<Frontpage cartItems={cartItems} />} />
+//           <Route path='/menu' element={<Menu selectedCategory={selectedCategory} addToCart={addToCart} userId={userId} />} />
 //           <Route path='/cart/:id' element={<Ncart cartItems={cartItems} addToCart={addToCart} />} />
-        
-//           <Route path="/payment/:id" element={<Payment/>} />
-//           <Route path='/admin/:id' element={<Admin/>} />
-//           <Route path='/category' element={<Category/>} />
-//           <Route path='/categoryTable' element={<CategoryTable/>} />
-//           <Route path='/categoryUpdate/:id' element={<CategoryUpdate/>} />
-//           <Route path='/chefForm' element={<ChefForm/>} />
-//           <Route path='/chefCard' element={<ChefCard/>} />
-//           <Route path='/chefUpdate/:id' element={<ChefUpdate/>} />
-//           <Route path='/food' element={<FoodForm/>} />
-//           <Route path='/foodTable' element={<FoodTable/>} />
-//           <Route path='/foodUpdate/:id' element={<FoodUpdate/>} />
-//           <Route path='/order' element={<Order/>} />
-//           <Route path='/orders' element={<AdminDashboard/>} />
+//           <Route path='/payment' element={<PaymentPage />} /> {/* Ensure the correct path */}
+//           <Route path='/admin/:id' element={<Admin />} />
+//           <Route path='/category' element={<Category />} />
+//           <Route path='/categoryTable' element={<CategoryTable />} />
+//           <Route path='/categoryUpdate/:id' element={<CategoryUpdate />} />
+//           <Route path='/chefForm' element={<ChefForm />} />
+//           <Route path='/chefCard' element={<ChefCard />} />
+//           <Route path='/chefUpdate/:id' element={<ChefUpdate />} />
+//           <Route path='/food' element={<FoodForm />} />
+//           <Route path='/foodTable' element={<FoodTable />} />
+//           <Route path='/foodUpdate/:id' element={<FoodUpdate />} />
+//           <Route path='/order/:id' element={<AdminOrder cartItems={cartItems} addToCart={addToCart} />} />
 //           <Route path='/paymentDetails' element={<PaymentDetails />} />
-//           <Route path='/ordersPage/:id' element={<OrdersPage/>}/>
-//           <Route path='/orderhistory/:id' element={<OrderHistory/>}/>
+//           <Route path='/orderhistory/:id' element={<OrderHistory />} />
 //         </Routes>
 //       </Router>
 //     </div>
@@ -138,9 +168,6 @@
 // }
 
 // export default App;
-
-
-// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -171,6 +198,8 @@ import AdminDashboard from './components/Admin/Order/Order.js';
 import OrderHistory from './components/OrderHistory.js';
 import Menu from './components/Frontpage/Menu.js';
 import AdminOrder from './components/Admin/Order/Order.js';
+import PaymentForm from './components/Payment/Payment.js';
+import PaymentPage from './components/Payment/Payment.js';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -179,7 +208,7 @@ function App() {
   const addToCart = (food) => {
     setCartItems([...cartItems, food]);
   };
-
+  const total = 0;
   return (
     <div className="App">
       <Router>
@@ -189,9 +218,11 @@ function App() {
           <Route path='/frontpage/:id' element={<Frontpage cartItems={cartItems}/>} />
           <Route path='/menu' element={<Menu selectedCategory={selectedCategory} addToCart={addToCart}  userId={userId}/>} />
           {/* Pass addToCart function to Ncart component */}
-          <Route path='/cart/:id' element={<Ncart cartItems={cartItems} addToCart={addToCart} />} />
+          <Route path='/cart/:id' element={<Ncart userId={userId} cartItems={cartItems} addToCart={addToCart} />} />
         
           <Route path="/payment/:id" element={<Payment/>} />
+          
+         
           <Route path='/admin/:id' element={<Admin/>} />
           <Route path='/category' element={<Category/>} />
           <Route path='/categoryTable' element={<CategoryTable/>} />
@@ -207,7 +238,8 @@ function App() {
           <Route path='/paymentDetails' element={<PaymentDetails />} />
           {/* <Route path='/ordersPage/:id' element={<OrdersPage/>}/> */}
           <Route path='/orderhistory/:id' element={<OrderHistory/>}/>
-        </Routes>
+         
+          </Routes>
       </Router>
     </div>
   );

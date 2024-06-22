@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import NAV from '../../Navbar/NAV';
 import Sidebar from '../Sidebar/Sidebar';
 import '../Category/category.css'
+import AdminNav from '../../Navbar/AdminNav';
 
 function ChefUpdate() {
   const [chefname, setChefname] = useState('');
@@ -55,7 +56,7 @@ function ChefUpdate() {
 
   return (
     <div className='form-bg'>
-      <div>  <NAV/></div>
+      <div>  <AdminNav/></div>
       
      
     <div className='background'style={{height:'100vh'}} >

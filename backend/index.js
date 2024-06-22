@@ -1,12 +1,9 @@
-// 13 APRIL 2024
-
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const port = 4000;
-// const loginModel = require('../backend/models/login')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser =require('cookie-parser');
@@ -19,9 +16,15 @@ const foodModel = require('../backend/models/food')
 const orderModel = require ('../backend/models/order')
 const paymentModel =require('../backend/models/payment')
 const User = require('../backend/models/user')
-
 const Cart = require('../backend/models/order')
-
+const http = require('http');
+const socketIo = require('socket.io');
+const razorpay = require("razorpay");
+const Razorpay = require('razorpay');
+const { log } = require('console');
+const userModel = require('../backend/models/user');
+require("dotenv").config()
+// const stripe = require('stripe')('sk_test_51PHRE5F5USFgoNnq6I1X5UFzOi9YpoL3HNYs7DNNDbNTNXMC90V5bxOwoiHWwAwBRTM2cvXQ66gIW5liDrFb2ya000F28YLXov')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,13 +37,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
+app.use(express.urlencoded({extended: false }));
+
+
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
+const server = http.createServer(app);
+const io = socketIo(server);
 
-mongoose.connect('mongodb://localhost:27017/FOOD')
+mongoose.connect('mongodb://127.0.0.1:27017/FOOD')
 .then(()=>{
     console.log('mongoose is connected');
 })
@@ -48,13 +57,17 @@ mongoose.connect('mongodb://localhost:27017/FOOD')
     console.log(err);
     
 })
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+const razorpaySecret = process.env.RAZORPAY_SECRET;
 
-
+// Initialize Razorpay instance with key ID and secret
+const razorpayInstance = new razorpay({
+  key_id: razorpayKeyId,
+  key_secret: razorpaySecret
+});
 
 /////////////////LOGIN///////////
 
-
-//////////////////////////////New code for Login Signin
 app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
  
@@ -76,7 +89,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// User login
+////////////// User login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
  
@@ -105,44 +118,49 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// app.get('/getallusers', async (req, res) => {
+// app.get('/user/:id', async (req, res) => {
+//   const userId = req.params.id;
+
 //   try {
-//     const users = await User.find();
-//     res.send(users);
+  
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+
+//     const userData = {
+//       name: user.name,
+//       email: user.email
+//     };
+
+//     res.json(userData);
 //   } catch (error) {
-//     return res.status(400).json({ error: error.message });
+//     console.error('Error fetching user data:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
 //   }
 // });
 
-
 app.get('/user/:id', async (req, res) => {
   const userId = req.params.id;
-
+  console.log(`Get User: Received userId: ${userId}`); // Log userId
   try {
   
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-
-    const userData = {
-      name: user.name,
-      email: user.email
-    };
-
-    res.json(userData);
+    res.json(user);
   } catch (error) {
     console.error('Error fetching user data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ message: 'Failed to fetch user data' });
   }
 });
-
 
   ////////////////////Category/////////////////////////////////////////////
 
   app.get('/categoryName', async (req, res) => {
     try {
-      const categories = await categoryModel.find({}, 'category'); // Retrieve only the department field
+      const categories = await categoryModel.find({}, 'category'); 
       res.json(categories);
     } catch (error) {
       console.error(error);
@@ -157,7 +175,7 @@ app.get('/user/:id', async (req, res) => {
       const newCategory = await categoryModel.create({
         name,
         
-        image: `/images/${path.basename(imagePath)}`, // Save the image path relative to the public/images directory
+        image: `/images/${path.basename(imagePath)}`, 
         category
       });
   
@@ -169,8 +187,6 @@ app.get('/user/:id', async (req, res) => {
       console.log(err);
     }
   });
-
-
 
   app.get('/getCategory', async (req, res) => {
     try {
@@ -195,7 +211,7 @@ app.get('/user/:id', async (req, res) => {
 
   app.get("/getProductCategory/:id", async (req, res) => {
     const { id } = req.params;
-    await categoryModel.findById(id) // Assuming Department is your Mongoose model
+    await categoryModel.findById(id) 
       .then((category) => {
         res.json(category);
       })
@@ -208,7 +224,7 @@ app.get('/user/:id', async (req, res) => {
   app.put("/updateCategory/:id", upload.single('image'), async (req, res) => {
     const { id } = req.params;
     const { name,category } = req.body;
-    let image = req.file ? `/images/${req.file.filename}` : null; // Update the image path if a new image is uploaded
+    let image = req.file ? `/images/${req.file.filename}` : null; 
     try {
       const updatedCategory = await categoryModel.findByIdAndUpdate(id, { category, name, image }, { new: true });
       res.json(updatedCategory);
@@ -221,7 +237,7 @@ app.get('/user/:id', async (req, res) => {
 // ////////////////////////////////CHEF/////////////////////////
 app.get('/chefName', async (req, res) => {
   try {
-    const chefs = await chefModel.find({}, 'chef'); // Retrieve only the department field
+    const chefs = await chefModel.find({}, 'chef'); 
     res.json(chefs);
   } catch (error) {
     console.error(error);
@@ -249,8 +265,6 @@ app.post('/chef', upload.single('image'), async (req, res) => {
   }
 });
 
-
-
 app.get('/getChef', async (req, res) => {
   try {
     const chefs = await chefModel.find();
@@ -274,7 +288,7 @@ app.delete("/deleteChef/:id", (req, res) => {
 
 app.get("/getUserChef/:id", async (req, res) => {
   const { id } = req.params;
-  await chefModel.findById(id) // Assuming Department is your Mongoose model
+  await chefModel.findById(id) 
     .then((chef) => {
       res.json(chef);
     })
@@ -298,12 +312,11 @@ app.put("/updateChef/:id", upload.single('image'), async (req, res) => {
 });
 ////////////////////////////FOOD////////////////////////////////
 
-
-
-
 app.get('/foodName', async (req, res) => {
   try {
+    
     const foods = await foodModel.find({}, 'foodname'); // Retrieve only the department field
+    console.log("Foods fetched:", foods); // Log the fetched foods
     res.json(foods);
   } catch (error) {
     console.error(error);
@@ -313,14 +326,15 @@ app.get('/foodName', async (req, res) => {
 
 app.post('/food', upload.single('image'), async (req, res) => {
   try {
-    const { foodname,description,price,category } = req.body;
+    const { foodname,description,price,category,availability} = req.body;
     const imagePath = req.file.path;
     const newFood = await foodModel.create({
       foodname,
       description,
       image: `/images/${path.basename(imagePath)}`, // Save the image path relative to the public/images directory
       price,
-      category
+      category,
+      availability
     });
 
     res.status(201).json({ food: newFood });
@@ -331,8 +345,6 @@ app.post('/food', upload.single('image'), async (req, res) => {
     console.log(err);
   }
 });
-
-
 
 app.get('/getFood', async (req, res) => {
   try {
@@ -369,10 +381,10 @@ app.get("/getUserFood/:id", async (req, res) => {
 
 app.put("/updateFood/:id", upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const { foodname,description,price,category } = req.body;
+  const { foodname,description,price,category,availability } = req.body;
   let image = req.file ? `/images/${req.file.filename}` : null; // Update the image path if a new image is uploaded
   try {
-    const updatedFood = await foodModel.findByIdAndUpdate(id, { foodname,description, image,price,category }, { new: true });
+    const updatedFood = await foodModel.findByIdAndUpdate(id, { foodname,description, image,price,category,availability }, { new: true });
     res.json(updatedFood);
   } catch (err) {
     console.error(err);
@@ -419,69 +431,8 @@ app.get('/getReview', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-//////////////////////////ORDERS/////////////////////////
 
-
-// Fetch all orders
-app.get('/admin/orders', async (req, res) => {
-  try {
-    const orders = await orderModel.find();
-    res.json({ success: true, orders });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
-
-
-// Assuming you have a route to handle fetching orders in your Express app
-app.get('/admin/orders', async (req, res) => {
-  try {
-    // Assuming orderModel contains the necessary food details
-    const orders = await orderModel.find().populate('items.foodName');
-    res.json({ success: true, orders });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
-
-
-// Update order status by ID
-app.put('/orders/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { status } = req.body;
-
-    // Validate status
-    if (!status) {
-      return res.status(400).json({ success: false, message: 'Status is required' });
-    }
-
-    const updatedOrder = await orderModel.findByIdAndUpdate(id, { status }, { new: true });
-
-    if (!updatedOrder) {
-      return res.status(404).json({ success: false, message: 'Order not found' });
-    }
-
-    // You can implement notifications here
-
-    res.json({ success: true, updatedOrder });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-});
-
-
-app.get('/getOrdersByUser/:id', async (req, res) => {
-  try {
-    const id = req.params.id
-    const orders = await orderModel.find({ id }); // Retrieve orders by user ID
-    res.json({ orders });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-///////////////////////////////////////////////////////////////////
-
+//////////////////Payment//////////////////
 app.post('/payment', async (req, res) => {
   try {
     const { name, address, total, place } = req.body;
@@ -509,134 +460,103 @@ app.get('/paymentdetails',async(req,res)=>{
     res.status(500).json({ error: error.message });
   }
 })
-// /////////////////////////////////////
 
-app.post('/api/order', async (req, res) => {
+////////////////ORDERS ADMIN/USER////////////////
+
+app.get('/getOrdersByUser/:id', async (req, res) => {
   try {
-    const { userId, foodItems, totalPrice } = req.body;
-    
-    // Save the order details to the database, along with the current date
-    const order = new orderModel({
-      userId,
-      foodItems,
-      totalPrice,
-      orderDate: new Date() // Add order date
-    });
-
-    await order.save();
-
-    res.status(201).json({ message: 'Order placed successfully' });
+    const id = req.params.id
+    const orders = await orderModel.find({ id }); // Retrieve orders by user ID
+    res.json({ orders });
   } catch (error) {
-    console.error('Error confirming order:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// API endpoint to fetch order history for a specific user
-// API endpoint to fetch order history for a specific user
-app.get('/api/order/history/:userId', async (req, res) => {
-  const userId = req.params.userId;
+  
 
-  try {
-    // Fetch order history for the given user ID
-    const orderHistory = await orderModel.find({ userId }).select('-_id foodItems totalPrice orderDate');
+  app.post('/addToCart/:id', async (req, res) => {
+    try {
+        const { userId, foodname, image, category, description, price } = req.body;
+        const cartItem = new Cart({ userId, foodname, image, category, description, price });
+        await cartItem.save();
 
-    res.status(200).json({ orders: orderHistory });
-  } catch (error) {
-    console.error('Error fetching order history:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-////////////////////////////////////////////////
+        const user = await userModel.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-
-let selectedFood = [];
-
-app.post('/api/selectedFood', (req, res) => {
-  const { foodItems } = req.body;
-  selectedFood = foodItems; // Update selectedFood with new food items
-  res.status(200).send('Selected food items added successfully.');
-});
-
-app.get('/api/selectedFood', (req, res) => {
-  res.json(selectedFood);
-});
-////////////////////////////////////////////////
-app.post('/addToCart', async (req, res) => {
-  try {
-      const { userId, foodname, image, category, description, price } = req.body;
-      const cartItem = new Cart({ userId, foodname, image, category, description, price });
-      await cartItem.save();
-      res.status(201).json({ message: 'Item added to cart successfully' });
-  } catch (error) {
-      console.error('Error adding item to cart:', error);
-      res.status(500).json({ message: 'Failed to add item to cart' });
-  }
-});
-
-
-
-
-app.get('/cartData', async (req, res) => {
-  try {
-      const cartData = await Cart.find();
-      res.json(cartData);
-  } catch (err) {
-      res.status(500).json({ message: err.message });
-  }
-});
-
-
-
-app.delete('/deleteCartItem/:id', async (req, res) => {
-  const itemId = req.params.id;
-  try {
-    // Find the cart item by ID and delete it
-    const deletedItem = await Cart.findByIdAndDelete(itemId);
-    if (!deletedItem) {
-      return res.status(404).json({ message: 'Cart item not found' });
+        user.userCollection.push(req.body);
+        await user.save();
+        res.status(201).json({ message: 'Item added to cart successfully' });
+    } catch (error) {
+        console.error('Error adding item to cart:', error);
+        res.status(500).json({ message: 'Failed to add item to cart' });
     }
-    res.status(200).json({ message: 'Cart item deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting cart item:', error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
 });
 
 
 
-app.get('/trackOrder/:orderId', async (req, res) => {
+
+
+
+app.delete('/removeFromCart/:id/:itemId', async (req, res) => {
   try {
-    const orderId = req.params.orderId;
-    // Fetch order details from the database based on the orderId
-    const order = await Cart.findById(orderId);
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
+  const userId = req.params.id;
+  const itemId = req.params.itemId;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
-    // Return the current status of the order
-    res.status(200).json({ status: order.status });
+
+    const itemIndex = user.userCollection.findIndex(item => item._id == itemId);
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    user.userCollection.splice(itemIndex, 1);
+    await user.save();
+
+    res.status(200).json({ message: 'Item removed from cart successfully' });
   } catch (error) {
-    console.error("Error tracking order:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error('Error removing item from cart:', error);
+    res.status(500).json({ message: 'Failed to remove item from cart' });
   }
 });
 
-app.put('/updateOrderStatus/:orderId', async (req, res) => {
+
+   
+
+// app.get('/cartData', async (req, res) => {
+//   try {
+//       const cartData = await Cart.find();
+//       res.json(cartData);
+//   } catch (err) {
+//       res.status(500).json({ message: err.message });
+//   }
+// });
+app.get('/cartData/:id', async (req, res) => {
   try {
-    const orderId = req.params.orderId;
-    const { status } = req.body;
-
-    // Update order status in the database
-    await Cart.findByIdAndUpdate(orderId, { status });
-
-    res.status(200).json({ message: "Order status updated successfully" });
+    const { userId } = req.params;
+    const orders = await Cart.find({ id });
+    res.json(orders);
   } catch (error) {
-    console.error("Error updating order status:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Express route for fetching order history
+
+
+
+
+
+
+
+
+
+
+//////Admin Order SIde//////////
 app.get('/orderHistory', async (req, res) => {
   try {
     const orderHistory = await Cart.find();
@@ -646,8 +566,56 @@ app.get('/orderHistory', async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-//////////////////////////////////////
 
+///////Admin Order page
+app.put('/updateOrderStatus/:orderId', async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  try {
+    const updatedCart = await Cart.findByIdAndUpdate(orderId, { status }, { new: true });
+    if (!updatedCart) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    // Emit event to notify clients about the status change
+    io.emit('orderStatusUpdated', { orderId, status });
+
+    res.status(200).json({ message: 'Order status updated successfully' });
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// WebSocket connection handling
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
+///////////////////////////////////////////////////////
+app.post('/orderPay', async (req, res) => {
+  try {
+    const { amount, currency, receipt } = req.body;
+    const options = {
+      amount: amount * 100, // amount in smallest currency unit
+      currency,
+      receipt,
+    };
+    const order = await razorpayInstance.orders.create(options);
+    if (!order) {
+      return res.status(500).send('Error creating order');
+    }
+    res.json(order);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 app.listen(port,()=>{
     console.log(`server is connected to ${port}`);
 })

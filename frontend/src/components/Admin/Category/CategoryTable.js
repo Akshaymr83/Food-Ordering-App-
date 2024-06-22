@@ -5,6 +5,7 @@ import NAV from '../../Navbar/NAV';
 import Sidebar from '../Sidebar/Sidebar';
 import '../Category/category.css'
 import { Link } from 'react-router-dom';
+import AdminNav from '../../Navbar/AdminNav';
 
 
 
@@ -40,7 +41,7 @@ function CategoryTable() {
 
   return (
     <div style={{ fontFamily: "Poppins, sans-serif" }}>
-     <div>  <NAV/></div>
+      <div>  <AdminNav/></div>
      <div><Sidebar/></div>
       
      

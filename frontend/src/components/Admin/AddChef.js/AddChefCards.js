@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../AddChef.js/addChef.css'
 import NAV from '../../Navbar/NAV';
 import Sidebar from '../Sidebar/Sidebar';
+import AdminNav from '../../Navbar/AdminNav';
 
 
 
@@ -41,7 +42,7 @@ function ChefCard() {
 
   return (
     <div>
-      <div><NAV/></div>
+       <div>  <AdminNav/></div>
       <div><Sidebar/></div>
     
       

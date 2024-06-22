@@ -73,7 +73,68 @@ section nav .icon i:hover{
     flex-grow: 1;
     background-color: white;
     border-radius: 7px;
+  
+   
    
     /* width: 90px; */
     align-items: center;
 }
+/* Add this CSS to your component or a global stylesheet */
+/* Add this CSS to your component or a global stylesheet */
+.profile-box-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    height: 250px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+  .profile-box-dropdown p {
+    margin: 5px 0;
+  }
+  
+  .profile-box-dropdown button {
+    margin-top: 10px;
+  }
+  
+  
+  .profile-box-dropdown p {
+    margin: 5px 0;
+  }
+  
+  .profile-box-dropdown button {
+    margin-top: 10px;
+  }
+  
+
+  /* /// */
+  /* General navbar styles */
+.navbar-nav {
+    align-items: center;
+  }
+  
+  /* Styles for mobile view when the navbar is toggled */
+  @media (max-width: 992px) {
+    .navbar-collapse{
+        border: 1px solid black;
+    }
+    .navbar-nav {
+      padding-left: 2px
+    }
+    
+    .navbar-nav .nav-item {
+      margin-bottom: 0.5rem;
+    }
+  
+    .navbar-nav .nav-link {
+      padding-left: 0;
+    }
+  }
+  
+  .nav-item{
+    padding-left: 1rem;
+  }

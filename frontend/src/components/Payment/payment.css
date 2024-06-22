@@ -103,3 +103,31 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.discount-btn {
+  width: 150px;
+  height: 180px;
+  background-color: rgb(255 255 255);
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 2px 3px 12px -4px;
+  box-shadow: black;
+  box-shadow: -1px 7px 14px -4px;
+    box-shadow: black;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.discount-btn:hover{
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
+.discount-btn p{
+  color: rgb(18 238 18);
+    font-weight: 600;
+}

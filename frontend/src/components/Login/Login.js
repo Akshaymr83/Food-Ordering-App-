@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,12 +21,12 @@ const Login = () => {
       const response = await axios.post('http://localhost:4000/login', user);
       setLoading(false);
 
-      const userData = {
-        name: response.data.name,
-        token: response.data.token,
-      };
+      // const userData = {
+      //   name: response.data.name,
+      //   token: response.data.token,
+      // };
 
-      localStorage.setItem('currentUser', JSON.stringify(userData));
+      localStorage.setItem('currentUser', JSON.stringify(response.data));
       console.log('Login successful', response.data);
 
       // Check if the user is an admin

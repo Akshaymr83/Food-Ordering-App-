@@ -28,6 +28,7 @@ const cartSchema = new mongoose.Schema({
     category: String,
     description: String,
     price: Number,  
+    availability:String,
     orderId: String,
   status: { type: String, default: "Pending" },
   foodId:{
