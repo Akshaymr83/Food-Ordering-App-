@@ -1,0 +1,122 @@
+/* MiniChef.css */
+.mini-chef {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Start position outside the view */
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideIn 1s forwards;
+    z-index: 1000;
+  }
+  
+  .mini-chef__content {
+    margin-top: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mini-chef__img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* .mini-chef__speech-bubble {
+    padding: 10px;
+    background-color: #fb2157;
+    border-radius: 10px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    
+  } */
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 38px;
+    cursor: pointer;
+    color: #323232;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    margin-top: 70px;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      right: -300px; /* Start position outside the view */
+    }
+    100% {
+      right: 0; /* End position */
+    }
+  }
+  .mini-chef {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    animation: slideInFromBottom 0.5s ease-out;
+    animation-fill-mode: both;
+  }
+  
+  .mini-chef__content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mini-chef__img {
+    width: 250px;
+    height: 250px;
+
+    margin-right: 10px;
+  }
+  
+  .mini-chef__speech-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mini-chef__speech-bubble {
+    background-color: #fb2157;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    max-width: 300px;
+    word-wrap: break-word;
+    animation: fadeIn 0.5s ease-in-out;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  

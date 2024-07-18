@@ -47,7 +47,26 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 const server = http.createServer(app);
-const io = socketIo(server);
+
+const io = socketIo(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+
+  socket.on('orderStatusUpdate', (data) => {
+    console.log('Order status updated:', data);
+    io.emit('orderStatusUpdate', data); // Broadcast to all clients
+  });
+});
 
 mongoose.connect('mongodb://127.0.0.1:27017/FOOD')
 .then(()=>{
@@ -57,6 +76,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/FOOD')
     console.log(err);
     
 })
+
 const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
 const razorpaySecret = process.env.RAZORPAY_SECRET;
 
@@ -140,21 +160,6 @@ app.post('/login', async (req, res) => {
 //   }
 // });
 
-app.get('/user/:id', async (req, res) => {
-  const userId = req.params.id;
-  console.log(`Get User: Received userId: ${userId}`); // Log userId
-  try {
-  
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.json(user);
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    res.status(500).json({ message: 'Failed to fetch user data' });
-  }
-});
 
   ////////////////////Category/////////////////////////////////////////////
 
@@ -463,15 +468,39 @@ app.get('/paymentdetails',async(req,res)=>{
 
 ////////////////ORDERS ADMIN/USER////////////////
 
-app.get('/getOrdersByUser/:id', async (req, res) => {
+app.get('/getOrderHistory/:id', async (req, res) => {
   try {
-    const id = req.params.id
-    const orders = await orderModel.find({ id }); // Retrieve orders by user ID
-    res.json({ orders });
+    const user = await userModel.findById(req.params.id);
+    res.json(user.userCollection);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
+// app.get('/user/:id', async (req, res) => {
+//   const userId = req.params.id;
+//   console.log(`Get User: Received userId: ${userId}`); // Log userId
+//   try {
+  
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+//     res.json(user);
+//   } catch (error) {
+//     console.error('Error fetching user data:', error);
+//     res.status(500).json({ message: 'Failed to fetch user data' });
+//   }
+// });
+app.get('/user/:id', async (req, res) => {
+  try {
+      const user = await userModel.findById(req.params.id);
+      res.json(user);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
+
+
 
   
 
@@ -538,64 +567,75 @@ app.delete('/removeFromCart/:id/:itemId', async (req, res) => {
 // });
 app.get('/cartData/:id', async (req, res) => {
   try {
-    const { userId } = req.params;
-    const orders = await Cart.find({ id });
-    res.json(orders);
+    const user = await userModel.findById(req.params.id).populate('cart.cartId');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json({ cartItems: user.userCollection, userName: user.name });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
-
-
-
-
-
-
-
-
 
 
 
 //////Admin Order SIde//////////
+const Order = mongoose.model('Order', new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  foodId: { type: mongoose.Schema.Types.ObjectId, ref: 'Food' },
+  status: String
+}));
+
 app.get('/orderHistory', async (req, res) => {
   try {
-    const orderHistory = await Cart.find();
+    const orderHistory = await Order.find().populate('userId').populate('foodId');
     res.status(200).json(orderHistory);
   } catch (error) {
-    console.error("Error fetching order history:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error('Error fetching order history:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-///////Admin Order page
-app.put('/updateOrderStatus/:orderId', async (req, res) => {
-  const { orderId } = req.params;
-  const { status } = req.body;
+
+app.post('/updateOrderStatus/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { foodId, status } = req.body;
 
   try {
-    const updatedCart = await Cart.findByIdAndUpdate(orderId, { status }, { new: true });
-    if (!updatedCart) {
-      return res.status(404).json({ error: 'Order not found' });
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    // Emit event to notify clients about the status change
-    io.emit('orderStatusUpdated', { orderId, status });
+    const orderIndex = user.userCollection.findIndex(order => order._id.toString() === foodId);
+    if (orderIndex === -1) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    user.userCollection[orderIndex].status = status;
+    await user.save();
+
+    io.emit('orderStatusUpdate', { userId, foodId, status });
 
     res.status(200).json({ message: 'Order status updated successfully' });
   } catch (error) {
-    console.error('Error updating order status:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ message: error.message });
   }
 });
 
 // WebSocket connection handling
 io.on('connection', (socket) => {
-  console.log('New client connected');
+  console.log('A user connected');
 
   socket.on('disconnect', () => {
-    console.log('Client disconnected');
+    console.log('User disconnected');
+  });
+
+  socket.on('orderStatusUpdate', (data) => {
+    io.to(data.userId).emit('statusUpdate', data);
   });
 });
+
 
 ///////////////////////////////////////////////////////
 app.post('/orderPay', async (req, res) => {
@@ -616,10 +656,37 @@ app.post('/orderPay', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-app.listen(port,()=>{
-    console.log(`server is connected to ${port}`);
-})
 
+// /////////////////////
+
+// Example using Express.js
+app.post('/cancelOrder/:userId/:foodId', async (req, res) => {
+  const { userId, foodId } = req.params;
+  try {
+    console.log(`Attempting to cancel order for userId: ${userId}, foodId: ${foodId}`);
+    const order = await Order.findOneAndUpdate(
+      { userId, _id: foodId },
+      { status: 'Cancelled' },
+      { new: true }
+    );
+    if (order) {
+      res.status(200).json({ message: 'Order cancelled successfully', order });
+    } else {
+      res.status(404).json({ error: 'Order not found' });
+    }
+  } catch (err) {
+    console.error('Error cancelling order:', err);
+    res.status(500).json({ error: 'Error cancelling order' });
+  }
+});
+
+
+
+
+
+server.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
 
 
 

@@ -387,6 +387,7 @@ const FoodForm = () => {
               placeholder="description"
               value={formData.description}
               onChange={handleChange}
+              maxLength={100}
             />
             <br />
             <input

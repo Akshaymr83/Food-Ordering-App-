@@ -97,7 +97,7 @@ const navigate = useNavigate();
    
     
    
-  <div >
+  <div className='categoryform2'>
     
    
     <div className='categoryform' style={{background:'rgb(172 166 167 / 10%)'}}>

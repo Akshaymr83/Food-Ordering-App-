@@ -410,7 +410,7 @@ left: 38%;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   width: 100%;
-  padding-top: 15%;
+  padding-top: 5%;
   padding-bottom: 20%;
 }
 
@@ -540,7 +540,7 @@ left: 38%;
   width: 95%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr  ;
   row-gap: 1rem;
 
 }
@@ -566,14 +566,14 @@ left: 38%;
   padding-left: 25px;
 }
 
-.info {
+/* .info {
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-}
+} */
 
 .menu .menu_box .menu_card .menu_image img {
   width: 150px;
@@ -635,22 +635,10 @@ left: 38%;
   color: #fb2157;
 }
 
-.menu .menu_box .menu_card .menu_info p {
-  text-align: center;
-  margin-top: 8px;
-  line-height: 21px;
-}
 
-.menu .menu_box .menu_card .menu_info h3 {
-  text-align: center;
-  margin-top: 10px;
-}
 
-.menu .menu_box .menu_card .menu_info .menu_icon {
-  color: #fb2157;
-  text-align: center;
-  margin: 10px 0 10px 0;
-}
+
+
 
 .menu .menu_box .menu_card .menu_info .menu_btn {
   display: flex;
@@ -664,6 +652,20 @@ left: 38%;
   padding: 8px 10px;
   margin: 0 80px;
   transition: 0.3s;
+}
+@media screen and (max-width: 992px){
+     
+  .menu .menu_box {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    row-gap: 1rem;
+   
+  
+  }
+ 
+
 }
 
 /* ///////////////////////////////////////////Gallary */
@@ -811,6 +813,15 @@ left: 38%;
   color: #fb2157;
 }
 
+.team .team_box .profile:hover {
+  border-radius: 20px;
+  height: 330px;
+  overflow-y: scroll;
+}
+
+
+
+
 /* ////////////////////////////////REVIEW/////////////////// */
 
 .review {
@@ -917,6 +928,51 @@ left: 38%;
 
 .review .review_box .review_card:hover .review_text p {
   margin-top: 5px;
+}
+@media screen and (max-width: 992px){
+  .categoryform2{
+    margin-top: 100px;
+    
+    
+    }
+   
+    input{
+      width: 40px;
+      height: 40px;
+
+    }
+   
+    
+     
+    .review .review_box {
+      width: 50%;
+      
+    }
+    
+    .review .review_box .review_card {
+      font-size: 8px;
+      width: 350px;
+      height: 350px;
+     
+    
+    }
+    .review .review_box .review_card .review_profile img {
+      width: 90px;
+      height: 90px;
+  
+    }
+    
+    .FRONTPAGE{
+      overflow-x: hidden;
+    }
+    
+
+}
+
+
+@media screen and (max-width:576px) {
+
+ 
 }
 
 /* ////////////////////////////////////FOOOTER */
@@ -1274,12 +1330,49 @@ input:not(:placeholder-shown)~.reset {
 
 /* Add more media queries as needed for smaller screen sizes */
 @media screen and (max-width: 992px){
+  .loginput::placeholder {
+    font-size: 0.9em; /* Adjust the font size as needed */
+  }
+  .loginput{
+    overflow: hidden;
+  }
+  .signupcontainer2{
+    width: 300px;
+    margin-left: -40px;
+  }
+  .about-content {
+    display: flex;
+   flex-direction: column;
+  }
+  
+  .image__gallary {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+  .searchForm input{
+
+  background: none;
+
+  }
+ 
+  
+  
 
 }
 
 
 @media screen and (max-width:576px) {
-  
+  .loginput::placeholder {
+    font-size: 0.8em; /* Adjust the font size as needed */
+  }
+  .loginput{
+    overflow: hidden;
+  }
+ 
+ 
+
+ 
 }
 
 
@@ -1291,4 +1384,6 @@ input:not(:placeholder-shown)~.reset {
 }
 
 
- 
+
+
+

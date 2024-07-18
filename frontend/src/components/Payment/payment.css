@@ -106,13 +106,15 @@
 
 .discount-btn {
   width: 150px;
-  height: 180px;
+  height: 210px;
   background-color: rgb(255 255 255);
   color: rgb(0, 0, 0);
   font-size: 14px;
   border: none;
   border-radius: 8px;
   padding: 8px;
+  margin-bottom: 10px;
+  padding-top: 15px;
   box-shadow: 2px 3px 12px -4px;
   box-shadow: black;
   box-shadow: -1px 7px 14px -4px;
