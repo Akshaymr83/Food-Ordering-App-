@@ -44,303 +44,12 @@
   height: 400px;
 }
 
-/* ///////////////////////////////////////// */
-
-/* .overlay{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(255 255 255 / 30%);
-    top: 10%;
-    bottom: 0;
-    z-index: 1;
-    mix-blend-mode: hard-light;
-
-} */
-video {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 10%;
-  bottom: 0;
-  object-fit: cover;
-  margin-bottom: 70px;
-
-}
-
-.homeContent {
-  width: 100%;
-  height: max-content;
-  padding: 8rem 1.5rem 3rem;
-  row-gap: 3rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  margin: auto;
-  color: white;
-
-  z-index: 100;
-
-}
-
-.textDiv {
-  padding: 2rem 0;
-  font-family: "Poppins", sans-serif;
-  width: 130%;
-}
-
-.smallText {
-  font-size: 80px;
-  text-transform: uppercase;
-  color: #5b1f32;
-  font-weight: 600;
-
-
-}
-
-.homeTitle {
-  font-weight: 750;
-  position: relative;
-  font-size: 10.8rem;
-  color: #fb2157;
-}
-
-
-/* //////////////////////////////// */
-/* card */
-header {
-  background-color: var(--secondary-color);
-  margin-bottom: 10rem;
-}
-
-.header__container {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-.header__image {
-  position: relative;
-}
-
-.header__image img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 0.5rem solid var(--extra-light);
-  border-radius: 2rem;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-}
-
-.header__image img:nth-child(1) {
-  max-width: 350px;
-  transform: translate(-75%, -50%);
-}
-
-.header__image img:nth-child(2) {
-  max-width: 250px;
-  transform: translate(0%, -25%);
-}
-
-.header__content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header__content>div {
-  max-width: 400px;
-  display: grid;
-  gap: 1rem;
-}
-
-.header__content .sub__header {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary-color);
-}
-
-.header__content h1 {
-  font-size: 3rem;
-  line-height: 4rem;
-  font-weight: 800;
-  color: var(--text-dark);
-}
-
-.header__content .action__btns {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-top: 1rem;
-}
-
-.story {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  cursor: pointer;
-}
-
-.video__image {
-  position: relative;
-
-}
-
-.video__image img {
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
-}
-
-.video__image span {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translate(-50%, -50%);
-}
-
-.video__image span i {
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: red;
-  background-color: var(--extra-light);
-  border-radius: 100%;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
-}
-
-.story>span {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.destination__nav {
-  display: flex;
-  gap: 1rem;
-}
-
-.destination__nav span {
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-content: center;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  border-radius: 100%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.destination__nav span:hover {
-  color: var(--extra-light);
-  background-color: var(--primary-color);
-}
-
-.destination__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  margin-bottom: 5rem;
-}
-
-
-.destination__card {
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-  cursor: pointer;
-}
-
-.destination__card img {
-  border-radius: 1rem;
-  object-fit: cover;
-  height: 400px;
-  width: 400px;
-  border: 3px solid white;
-
-}
-
-.destination__details {
-
-  position: absolute;
-  /* width: calc(100% - 2rem); */
-  width: 387px;
-  padding: 1rem;
-  bottom: -7rem;
-  left: 43%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: var(--extra-light);
-  background-color: rgb(255 255 255 / 64%);
-
-  border-radius: 12px;
-  z-index: 1;
-  transition: 0.3s;
-}
-
-.destination__card:hover .destination__details {
-  bottom: 1rem;
-}
-
-.destination__title {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.destination__subtitle {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.destination__container {
-  padding-top: 8%;
-  margin-top: 5%;
-  background-color: #fb2157;
-  height: 190vh;
-  padding-top: 10%;
-
-}
-
-.section__title {
-  color: #5b1f32;
-  font-size: 80PX;
-  font-weight: 700;
-  text-align: center;
-
-}
-
 .section__title__span {
   color: #ffffff;
   font-family: "Racing Sans One", sans-serif;
   font-weight: 750;
   font-style: normal;
 
-
-}
-@media (max-width: 992px) {
-  
-.destination__card img {
-  border-radius: 1rem;
-  object-fit: cover;
-  height: 350px;
-  width: 200px;
-  border: 2px solid white;
-
-}
-.destination__details {
-
-width: 200px;
-padding: 0;
-left: 38%;
-}
 }
 
 /* //////////////////////////////////////////GALLERy////////////////////////////////// */
@@ -506,7 +215,6 @@ left: 38%;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
     width: 300px;
     margin-left: 2rem;
-  
     object-fit: contain;
   }
   
@@ -565,15 +273,6 @@ left: 38%;
   object-fit: contain;
   padding-left: 25px;
 }
-
-/* .info {
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-} */
 
 .menu .menu_box .menu_card .menu_image img {
   width: 150px;
@@ -635,11 +334,6 @@ left: 38%;
   color: #fb2157;
 }
 
-
-
-
-
-
 .menu .menu_box .menu_card .menu_info .menu_btn {
   display: flex;
   align-items: center;
@@ -662,10 +356,8 @@ left: 38%;
     grid-template-columns: 1fr 1fr ;
     row-gap: 1rem;
    
-  
   }
  
-
 }
 
 /* ///////////////////////////////////////////Gallary */
@@ -675,7 +367,6 @@ left: 38%;
   height: 100vh;
 }
 
-
 /* ///////////////////////////////////////////////////////////OUR TEAM  */
 
 
@@ -684,7 +375,6 @@ left: 38%;
   height: 100%;
   padding-top: 3%;
   padding-bottom: 5%;
-
   background-size: cover;
   background-position: center;
 }
@@ -710,22 +400,14 @@ left: 38%;
 
 }
 
-
-
 .team .team_box {
   width: 100%;
   display: grid;
   justify-content: flex-start;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  /* top: -12%; */
-
-  /* overflow-x: auto; */
-  /* overflow: hidden; */
   overflow-wrap: break-word;
-  /* gap: 0rem; */
   row-gap: 4rem;
-  /* bottom: 37%; */
 }
 
 .team .team_box .profile {
@@ -765,9 +447,7 @@ left: 38%;
   margin-top: -230px;
   width: 130px;
   height: 130px;
-  padding-top: 8px;
-
-  
+  padding-top: 8px;  
  
 }
 
@@ -819,9 +499,6 @@ left: 38%;
   overflow-y: scroll;
 }
 
-
-
-
 /* ////////////////////////////////REVIEW/////////////////// */
 
 .review {
@@ -846,8 +523,6 @@ left: 38%;
   font-family: "Poppins", sans-serif;
 }
 
-
-
 .review .review_box {
   width: 95%;
   margin: 70px auto;
@@ -856,7 +531,7 @@ left: 38%;
 
 .review .review_box .review_card {
   width: 350px;
-  height: 550px;
+  height: 400px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   padding: 8px 20px;
@@ -930,49 +605,67 @@ left: 38%;
   margin-top: 5px;
 }
 @media screen and (max-width: 992px){
+
   .categoryform2{
     margin-top: 100px;
-    
-    
     }
-   
+
     input{
       width: 40px;
       height: 40px;
 
     }
-   
     
-     
-    .review .review_box {
-      width: 50%;
+ .review_box {
+      width: 30px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr ;
       
+    }
+    .review_text{
+     font-size: 10px;
     }
     
     .review .review_box .review_card {
       font-size: 8px;
       width: 350px;
-      height: 350px;
-     
-    
+      height: 350px; 
     }
     .review .review_box .review_card .review_profile img {
       width: 90px;
       height: 90px;
-  
     }
     
     .FRONTPAGE{
       overflow-x: hidden;
     }
     
-
+    .team .team_box {
+ 
+      grid-template-columns: 1fr 1fr ;
+  
+    }
+    .team .team_box .profile {
+      width: 200px;
+      height: 200px;
+     
+    }
+    
+.team .team_box .profile img {
+  width: 150px;
+  height: 150px;
+  
+}
+ 
 }
 
 
-@media screen and (max-width:576px) {
 
- 
+.signup-link {
+  color: rgb(0, 255, 98);
+  text-align: center;
+  text-decoration: none;
 }
 
 /* ////////////////////////////////////FOOOTER */
@@ -1157,9 +850,7 @@ left: 38%;
   border: none;
   border-radius: 20px;
   color: rgb(0, 0, 0);
-  /* background: rgba(255, 255, 255, 0.292); */
   background: rgba(255, 255, 255, 0.827);
-
 
 }
 
@@ -1182,8 +873,6 @@ left: 38%;
   background-color: #0b81c2;
 }
 
-
-
 .background {
   background-image: url('../Images/frontendbg2.jpg');
   background-position: center;
@@ -1192,8 +881,6 @@ left: 38%;
   background-attachment: fixed;
   object-fit: cover;
   height: 100%;
-
-
 }
 
 .table {
@@ -1232,17 +919,12 @@ left: 38%;
 }
 
 
-/* /////////////////////////// */
-/* From uiverse.io by @satyamchaudharydev */
-/* removing default style of button */
-
 .form button {
   border: none;
   background: none;
   color: #8b8ba7;
 }
 
-/* styling of whole input container */
 .form {
   --timing: 0.3s;
   --width-of-input: 200px;
@@ -1264,7 +946,6 @@ left: 38%;
   background: var(--input-bg, #fff);
 }
 
-/* styling of Input */
 .input {
   font-size: 0.9rem;
   background-color: transparent;
@@ -1275,7 +956,6 @@ left: 38%;
   border: none;
 }
 
-/* styling of animated border */
 .form:before {
   content: "";
   position: absolute;
@@ -1299,13 +979,10 @@ input:focus {
   outline: none;
 }
 
-/* here is code of animated border */
 .form:focus-within:before {
   transform: scale(1);
 }
 
-/* styling of close button */
-/* == you can click the close button to remove text == */
 .reset {
   border: none;
   background: none;
@@ -1319,16 +996,13 @@ input:not(:placeholder-shown)~.reset {
   visibility: visible;
 }
 
-/* sizing svg icons */
+
 .form svg {
   width: 17px;
   margin-top: 3px;
 }
 
-/* //////////////////////////// */
 
-
-/* Add more media queries as needed for smaller screen sizes */
 @media screen and (max-width: 992px){
   .loginput::placeholder {
     font-size: 0.9em; /* Adjust the font size as needed */
@@ -1355,12 +1029,8 @@ input:not(:placeholder-shown)~.reset {
   background: none;
 
   }
- 
-  
-  
 
 }
-
 
 @media screen and (max-width:576px) {
   .loginput::placeholder {
@@ -1370,19 +1040,21 @@ input:not(:placeholder-shown)~.reset {
     overflow: hidden;
   }
  
- 
-
- 
 }
 
 
-@media screen and (max-width:350px) {
-   
-   
-  
-   
-}
+@media screen and (min-width: 415px) and (max-width: 767px) {
+  .menu_box {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 1rem;
+  }
 
+  .menu_card {
+    width: 10%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
 
 
 

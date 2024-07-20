@@ -48,7 +48,7 @@ function CategoryTable() {
     <div className='background' style={{height:'100%'}} >
 
       
-      <div>
+      <div style={{width:'100%',marginLeft:'2rem'}}>
       <table className="table">
         
         <thead>

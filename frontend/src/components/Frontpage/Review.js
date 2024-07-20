@@ -61,11 +61,12 @@ function Review() {
                 <div className="review_icon">
                   {/* Add your rating icons here */}
                 </div>
-                <div className="review_social">
+                <div style={{overflow:'hidden'}}  className="review_social">
+                <p >{review.description}</p>
                   {/* Add your social icons here */}
                 </div>
                 {/* <b><p style={{textTransform:'uppercase'}}>{reviewformData.name}</p></b> */}
-                <p>{review.description}</p>
+               
               </div>
             </div>
           ))}

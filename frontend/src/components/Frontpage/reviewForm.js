@@ -73,6 +73,7 @@ const navigate = useNavigate();
       await axios.post('http://localhost:4000/review', formDataToSend);
       console.log('Review added successfully');
       alert('Review added successfully');
+      window.location.reload()
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -109,7 +110,7 @@ const navigate = useNavigate();
      <input className="customer" type="text" name="customer" placeholder="Add name" value={reviewformData.name} onChange={handleChange}  style={{border:'0.7px solid black'}}/> <br></br>
 
       <input className="image" type="file" name="image" onChange={handleChange}  style={{border:'0.7px solid black'}}/> <br></br>
-      <input  className="description"type="text" name="description" placeholder="description" value={formData.description} onChange={handleChange} style={{border:'0.7px solid black'}} /> <br></br>
+      <input  className="description" type="text" maxlength="300" name="description" placeholder="description" value={formData.description} onChange={handleChange} style={{border:'0.7px solid black'}} /> <br></br>
       
       <button  className="submit"type="submit" style={{padding:'5px 13px 5px 13px',background:'#0d96f0',borderRadius:'1rem',border:'none',color:'white'}}>Submit</button>
     </form>

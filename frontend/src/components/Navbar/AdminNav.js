@@ -64,6 +64,7 @@ function AdminNav({ userId, cartItems })  {
         </button>
         <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`} id="navbarNav">
           <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${isNavOpen ? 'bg' : ''}`} style={{gap:'2rem',marginLeft:'3rem'}}>
+            <li><h4><b>ADMIN</b></h4></li>
           {/* <li className="nav-item" style={{textDecoration:'none'}}>
              <Link to={`/frontpage/${id}`} style={{textDecoration:'none'}}> <a className="nav-link" href="#home" style={{textDecoration:'none'}}>
                 <b>Home</b>

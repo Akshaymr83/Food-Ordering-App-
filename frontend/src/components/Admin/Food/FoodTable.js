@@ -117,7 +117,7 @@ function FoodTable() {
     <div style={{ fontFamily: "Poppins, sans-serif", height: '100%' }}>
       <div> <AdminNav /></div>
       <div><Sidebar /></div>
-      <div className='background' style={{ height: '100%' }}>
+      <div className='background' style={{ height: '100%',paddingLeft:'2rem',paddingRight:'2remm' }}>
         <table id='table' className="table">
           <thead>
             <tr>

@@ -121,8 +121,8 @@ function NAV({ userId, cartItems }) {
             <div style={{ border: '2px solid black', borderRadius: '50%', padding: '1rem', height: '5rem', width: '5rem' }}>
               <i className="fa-solid fa-user me-1" style={{ fontSize: '3rem', paddingLeft: '2px' }}></i>
             </div>
-            <p><b>Name:</b> {formData.name}</p>
-            <p><b>Email:</b> {formData.email}</p>
+            <p> <h4 style={{textTransform:'capitalize',fontWeight:'700'}}>{formData.name}</h4></p>
+         
             <button className="btn" onClick={handleLogout}>
               Logout
             </button>

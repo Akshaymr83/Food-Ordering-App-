@@ -21,10 +21,10 @@ function PaymentDetails() {
      <div><Sidebar/></div>
         <h1>Payment Details</h1>
         
-        <div className='background' style={{height:'100%'}} >
+        <div className='background' style={{height:'100vh'}} >
            
       <div></div>
-      <table className="table" style={{ marginBottom: '9rem',borderRadius:'none',marginTop:'3rem'}}>
+      <table className="table" style={{ marginBottom: '9rem',borderRadius:'none',marginTop:'3rem',marginLeft:'3rem'}}>
         <thead>
           <tr>
             <th scope="col">Name</th>

@@ -46,16 +46,17 @@ function ChefCard() {
       <div><Sidebar/></div>
     
       
-      <div className='background grid'>
+      <div className='background grid' style={{height:'100%',paddingBottom:'2rem'}}>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr ',columnGap:'1rem',marginTop:'10%',rowGap:'2rem'}}>
         
       {Array.isArray(chefs) && chefs.map((chef, index) => (
         <Card className='dcard  text-center' key={index} >
    
-          <Card.Img className='Img'
+          <Card.Img  style={{height:'150px',objectFit:'contain'}} className='Img'
             variant="top"
             src={`http://localhost:4000/${chef.image}`} // Assuming images are served from the root directory of the server
             alt={`Chef ${chef.chef}`}
+            
          
           />
 

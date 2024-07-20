@@ -476,29 +476,32 @@ app.get('/getOrderHistory/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 // app.get('/user/:id', async (req, res) => {
-//   const userId = req.params.id;
-//   console.log(`Get User: Received userId: ${userId}`); // Log userId
 //   try {
-  
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-//     res.json(user);
+//       const user = await userModel.findById(req.params.id);
+//       res.json(user);
 //   } catch (error) {
-//     console.error('Error fetching user data:', error);
-//     res.status(500).json({ message: 'Failed to fetch user data' });
+//       res.status(500).json({ message: error.message });
 //   }
 // });
 app.get('/user/:id', async (req, res) => {
   try {
       const user = await userModel.findById(req.params.id);
-      res.json(user);
+      if (user) {
+          res.json({
+              name: user.name,
+              userCollection: user.userCollection,
+              cart: user.cart
+          });
+      } else {
+          res.status(404).json({ message: 'User not found' });
+      }
   } catch (error) {
       res.status(500).json({ message: error.message });
   }
 });
+
 
 
 
@@ -557,14 +560,7 @@ app.delete('/removeFromCart/:id/:itemId', async (req, res) => {
 
    
 
-// app.get('/cartData', async (req, res) => {
-//   try {
-//       const cartData = await Cart.find();
-//       res.json(cartData);
-//   } catch (err) {
-//       res.status(500).json({ message: err.message });
-//   }
-// });
+
 app.get('/cartData/:id', async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id).populate('cart.cartId');
