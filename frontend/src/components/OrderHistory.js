@@ -9,12 +9,12 @@ import io from 'socket.io-client';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const socket = io('http://localhost:4000');
+const socket = io('https://food-ordering-app-wlwn.onrender.com');
 
 function OrderHistory() {
   const [cartItems, setCartItems] = useState([]);
   const { id } = useParams(); // Assuming id here refers to the userId
-  const userUrl = `http://localhost:4000/user/${id}`;
+  const userUrl = `https://food-ordering-app-wlwn.onrender.com/user/${id}`;
 
   useEffect(() => {
     axios.get(userUrl)
@@ -38,7 +38,7 @@ function OrderHistory() {
     try {
       // Delete item from backend
       const itemToDelete = cartItems.find(item => item.cartItemId === cartItemId);
-      await axios.delete(`http://localhost:4000/removeFromCart/${id}/${itemToDelete._id}`);
+      await axios.delete(`https://food-ordering-app-wlwn.onrender.com/removeFromCart/${id}/${itemToDelete._id}`);
       window.location.reload()
       alert("Click ok to Confirm the Cancelation.Our Team will contact you")
       toast.success('Item Canceled successfully,Refund will be done within 24 hours',);
@@ -75,7 +75,7 @@ function OrderHistory() {
                   <td><b>{order.foodname}</b></td>
                   <td><b>{order.price}</b></td>
                   <td>
-                    <img src={`http://localhost:4000/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                    <img src={`https://food-ordering-app-wlwn.onrender.com/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
                   </td>
                   <td>{order.status || 'Pending'}</td>
                   <td>{currentDate.toLocaleDateString()} {currentDate.toLocaleTimeString()}</td>

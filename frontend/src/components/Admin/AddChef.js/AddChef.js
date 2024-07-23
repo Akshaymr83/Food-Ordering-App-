@@ -25,7 +25,7 @@ const navigate=useNavigate();
   const [chefs, setChefs] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:4000/chefName')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/chefName')
       .then((res) => {
         setChefs(res.data);
       })
@@ -46,7 +46,7 @@ const navigate=useNavigate();
 
 
 
-      await axios.post('http://localhost:4000/chef', formDataToSend);
+      await axios.post('https://food-ordering-app-wlwn.onrender.com/chef', formDataToSend);
       console.log('Chef added successfully');
       alert('Chef added successfully');
       navigate('/chefCard')

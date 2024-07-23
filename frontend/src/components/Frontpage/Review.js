@@ -14,7 +14,7 @@ function Review() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/${id}`);
+        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
         const userData = response.data;
         setReviewFormData(prevState => ({
           ...prevState,
@@ -32,7 +32,7 @@ function Review() {
   }, [id]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/getReview")
+    axios.get("https://food-ordering-app-wlwn.onrender.com/getReview")
       .then((res) => {
         console.log("Data received:", res.data);
         setReviews(res.data.reviews); // Assuming 'reviews' is an array inside the response data
@@ -54,7 +54,7 @@ function Review() {
           {Array.isArray(reviews) && reviews.map((review, index) => (
             <div className="review_card" key={index}>
               <div className="review_profile">
-                <img src={`http://localhost:4000/${review.image}`} alt={`Customer ${review.customer}`} />
+                <img src={`https://food-ordering-app-wlwn.onrender.com/${review.image}`} alt={`Customer ${review.customer}`} />
               </div>
               <div className="review_text">
                 <h2 className="name">{review.review}</h2>

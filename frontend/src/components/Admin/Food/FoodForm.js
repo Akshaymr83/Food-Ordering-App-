@@ -29,7 +29,7 @@
 //   const [categories, setCategories] = useState([]);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:4000/categoryName')
+//     axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
 //       .then((res) => {
 //         setCategories(res.data);
 //       })
@@ -37,7 +37,7 @@
 //   }, []);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:4000/foodName')
+//     axios.get('https://food-ordering-app-wlwn.onrender.com/foodName')
 //       .then((res) => {
 //         setFoods(res.data);
 //       })
@@ -58,7 +58,7 @@
 //       formDataToSend.append('price', formData.price);
 //       formDataToSend.append('category', formData.category);
 
-//       await axios.post('http://localhost:4000/food', formDataToSend);
+//       await axios.post('https://food-ordering-app-wlwn.onrender.com/food', formDataToSend);
 //       console.log('Food added successfully');
 //       alert('Food added successfully');
 //       navigate('/foodTable');
@@ -175,7 +175,7 @@
 //   const [categories, setCategories] = useState([]);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:4000/categoryName')
+//     axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
 //       .then((res) => {
 //         setCategories(res.data);
 //       })
@@ -197,7 +197,7 @@
 //       formDataToSend.append('category', formData.category);
 //       formDataToSend.append('availability', formData.availability);
 
-//       await axios.post('http://localhost:4000/food', formDataToSend);
+//       await axios.post('https://food-ordering-app-wlwn.onrender.com/food', formDataToSend);
 //       console.log('Food added successfully');
 //       alert('Food added successfully');
 //       navigate('/foodTable');
@@ -324,7 +324,7 @@ const FoodForm = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/categoryName')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
       .then((res) => {
         setCategories(res.data);
       })
@@ -346,7 +346,7 @@ const FoodForm = () => {
       formDataToSend.append('category', formData.category);
       formDataToSend.append('availability', formData.availability);
 
-      await axios.post('http://localhost:4000/food', formDataToSend);
+      await axios.post('https://food-ordering-app-wlwn.onrender.com/food', formDataToSend);
       console.log('Food added successfully');
       alert('Food added successfully');
       navigate('/foodTable');

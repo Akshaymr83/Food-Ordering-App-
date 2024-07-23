@@ -26,7 +26,7 @@ import Menu from './components/Frontpage/Menu.js';
 import AdminOrder from './components/Admin/Order/Order.js';
 
 
-const socket = io('http://localhost:4000'); // Correct Socket.IO connection
+const socket = io('https://food-ordering-app-wlwn.onrender.com'); // Correct Socket.IO connection
 
 function App() {
   const [cartItems, setCartItems] = useState([]);

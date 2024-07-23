@@ -17,7 +17,7 @@ function Ncart() {
   const [foodTotal, setFoodTotal] = useState(0);
   const [total, setTotal] = useState(0);
   const { id } = useParams();
-  const url = `http://localhost:4000/user/${id}`;
+  const url = `https://food-ordering-app-wlwn.onrender.com/user/${id}`;
 
   useEffect(() => {
     axios.get(url)
@@ -65,7 +65,7 @@ function Ncart() {
     try {
       // Delete item from backend
       const itemToDelete = cartItems.find(item => item.cartItemId === cartItemId);
-      await axios.delete(`http://localhost:4000/removeFromCart/${id}/${itemToDelete._id}`);
+      await axios.delete(`https://food-ordering-app-wlwn.onrender.com/removeFromCart/${id}/${itemToDelete._id}`);
      
       window.location.reload()
     
@@ -116,7 +116,7 @@ function Ncart() {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={`http://localhost:4000/${item.image}`} alt={item.foodname} style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
+                        <img src={`https://food-ordering-app-wlwn.onrender.com/${item.image}`} alt={item.foodname} style={{ height: '100px', width: '100px', objectFit: 'contain' }} />
                       </div>
                     </div>
                   </div>

@@ -31,7 +31,7 @@ function Payment() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/${id}`);
+        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
         const userData = response.data;
         setFormData(prevState => ({
           ...prevState,
@@ -67,8 +67,8 @@ function Payment() {
     }
     try {
       setShowLoader(true);
-      await axios.post("http://localhost:4000/payment", { ...payData, total: discountedTotal });
-      const response = await axios.post("http://localhost:4000/orderPay", {
+      await axios.post("https://food-ordering-app-wlwn.onrender.com/payment", { ...payData, total: discountedTotal });
+      const response = await axios.post("https://food-ordering-app-wlwn.onrender.com/orderPay", {
         amount: discountedTotal, // Use the discounted total amount
         currency: "INR", // Set the currency
         receipt: "receipt#1", // Set the receipt ID

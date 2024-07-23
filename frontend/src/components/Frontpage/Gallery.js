@@ -6,7 +6,7 @@ function Gallery({ setSelectedCategory }) {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/getCategory")
+        axios.get("https://food-ordering-app-wlwn.onrender.com/getCategory")
             .then((res) => {
                 console.log("Data received:", res.data);
                 setCategories(res.data.categories);
@@ -38,7 +38,7 @@ function Gallery({ setSelectedCategory }) {
     {categories.map((category, index) => (
         <div onClick={() => handleClick(category.category)} className="gallary_image" key={index}>
             <div style={{ height: '100%', width: '100%', display: "flex", alignItems: 'center', flexDirection: 'column' }}>
-                <img style={{ width: '100%', height: 'auto' }} src={`http://localhost:4000/${category.image}`} alt={`Category ${category.category}`} />
+                <img style={{ width: '100%', height: 'auto' }} src={`https://food-ordering-app-wlwn.onrender.com/${category.image}`} alt={`Category ${category.category}`} />
                 <div style={{ padding: '1rem', color: 'white' }}> <h5>{category.category}</h5> </div>
             </div>
         </div>

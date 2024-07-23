@@ -19,7 +19,7 @@ const ReviewForm = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/${id}`);
+        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
         const userData = response.data;
         setReviewFormData(prevState => ({
           ...prevState,
@@ -55,7 +55,7 @@ const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   
   useEffect(() => {
-    axios.get('http://localhost:4000/reviewName')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/reviewName')
       .then((res) => {
         setReviews(res.data);
       })
@@ -70,7 +70,7 @@ const navigate = useNavigate();
     formDataToSend.append('description', formData.description);
   
     try {
-      await axios.post('http://localhost:4000/review', formDataToSend);
+      await axios.post('https://food-ordering-app-wlwn.onrender.com/review', formDataToSend);
       console.log('Review added successfully');
       alert('Review added successfully');
       window.location.reload()

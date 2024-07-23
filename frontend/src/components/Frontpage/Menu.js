@@ -12,7 +12,7 @@ function Menu({ selectedCategory, updateCart }) {
   const user = JSON.parse(localStorage.getItem('currentUser'));
 
   useEffect(() => {
-    axios.get("http://localhost:4000/getFood")
+    axios.get("https://food-ordering-app-wlwn.onrender.com/getFood")
       .then((res) => {
         console.log("Data received:", res.data);
         setFoods(res.data.foods);
@@ -39,7 +39,7 @@ function Menu({ selectedCategory, updateCart }) {
 
     try {
       console.log("Adding food to cart:", food);
-      const response = await axios.post(`http://localhost:4000/addToCart/${user._id}`, food);
+      const response = await axios.post(`https://food-ordering-app-wlwn.onrender.com/addToCart/${user._id}`, food);
       if (response.status === 200) {
         updateCart(food); // Notify parent component to update cart
         const updatedCartItems = [...cartItems, food];
@@ -105,7 +105,7 @@ function Menu({ selectedCategory, updateCart }) {
             {filteredFoods.map((food, index) => (
               <div className="menu_card" key={index} style={{ height: '350px', width: '240px' }}>
                 <div className="menu_image">
-                  <img src={`http://localhost:4000/${food.image}`} alt={`Food ${food.foodname}`} />
+                  <img src={`https://food-ordering-app-wlwn.onrender.com/${food.image}`} alt={`Food ${food.foodname}`} />
                   <div className='info' style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <p style={{ overflow: 'hidden', textOverflow: 'ellipsis' ,padding:'0',margin:'0'}}><b>{food.foodname}</b></p>
                     <p style={{ fontSize: '11px',padding:'0',margin:'0' }}>{food.description}</p>

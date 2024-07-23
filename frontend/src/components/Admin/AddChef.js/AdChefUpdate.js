@@ -14,7 +14,7 @@ function ChefUpdate() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/getUserChef/${id}`)
+    axios.get(`https://food-ordering-app-wlwn.onrender.com/getUserChef/${id}`)
       .then((res) => {
         const chefData = res.data; // Assuming the response contains the department data
         setChefname(chefData.chefname);
@@ -39,7 +39,7 @@ function ChefUpdate() {
       return; // Exit early if any field is empty
     }
 
-    axios.put(`http://localhost:4000/updateChef/${id}`, formData)
+    axios.put(`https://food-ordering-app-wlwn.onrender.com/updateChef/${id}`, formData)
       .then((res) => {
         console.log(res.data);
         alert("Success");

@@ -14,7 +14,7 @@ function CategoryTable() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:4000/getCategory")
+    axios.get("https://food-ordering-app-wlwn.onrender.com/getCategory")
       .then((res) => {
         console.log("Data received:", res.data);
         setCategories(res.data.categories);
@@ -24,7 +24,7 @@ function CategoryTable() {
       });
   }, []);
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/deleteCategory/${id}`)
+    axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteCategory/${id}`)
       .then((res) => {
         console.log("Category deleted");
         // Update the state after deletion
@@ -63,7 +63,7 @@ function CategoryTable() {
         <tbody>
           {categories.map((category, index) => (
             <tr key={index}>
-              <td style={{textTransform:'uppercase'}}><img style={{height:'100px',width:'100px',objectFit:'contain',borderRadius:'0.5rem'}} src={`http://localhost:4000/${category.image}`} alt={`Category ${category.name}`} /></td>
+              <td style={{textTransform:'uppercase'}}><img style={{height:'100px',width:'100px',objectFit:'contain',borderRadius:'0.5rem'}} src={`https://food-ordering-app-wlwn.onrender.com/${category.image}`} alt={`Category ${category.name}`} /></td>
               <td style={{textTransform:'uppercase',fontWeight:'550'}}><p style={{fontSize:"13px"}} >{category.name}</p></td>
               <td style={{textTransform:'uppercase',fontWeight:'550'}}><p  style={{fontSize:"13px"}}>{category.category}</p></td>
              

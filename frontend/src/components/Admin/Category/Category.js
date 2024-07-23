@@ -28,7 +28,7 @@ const navigate=useNavigate();
 
  
   useEffect(() => {
-    axios.get('http://localhost:4000/categoryName')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
       .then((res) => {
         setCategories(res.data);
       })
@@ -49,7 +49,7 @@ const navigate=useNavigate();
 
 
 
-      await axios.post('http://localhost:4000/category', formDataToSend);
+      await axios.post('https://food-ordering-app-wlwn.onrender.com/category', formDataToSend);
       console.log('Category added successfully');
       alert('Category added successfully');
       navigate('/CategoryTable')

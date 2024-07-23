@@ -11,7 +11,7 @@
 //   const [categories, setCategories] = useState([]);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:4000/categoryName')
+//     axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
 //       .then((res) => {
 //         setCategories(res.data);
 //       })
@@ -19,7 +19,7 @@
 //   }, []);
 
 //   useEffect(() => {
-//     axios.get("http://localhost:4000/getFood")
+//     axios.get("https://food-ordering-app-wlwn.onrender.com/getFood")
 //       .then((res) => {
 //         console.log("Data received:", res.data);
 //         setFoods(res.data.foods);
@@ -30,7 +30,7 @@
 //   }, []);
 
 //   const handleDelete = (id) => {
-//     axios.delete(`http://localhost:4000/deleteFood/${id}`)
+//     axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteFood/${id}`)
 //       .then((res) => {
 //         console.log("Food deleted");
 //         // Update the state after deletion
@@ -63,7 +63,7 @@
 //           <tbody>
 //             {foods.map((food, index) => (
 //               <tr key={index}>
-//                 <td style={{ textTransform: 'uppercase' }}><img style={{ height: '100px', width: '100px', objectFit: 'contain', borderRadius: '0.5rem' }} src={`http://localhost:4000/${food.image}`} alt={`Food ${food.foodname}`} /></td>
+//                 <td style={{ textTransform: 'uppercase' }}><img style={{ height: '100px', width: '100px', objectFit: 'contain', borderRadius: '0.5rem' }} src={`https://food-ordering-app-wlwn.onrender.com/${food.image}`} alt={`Food ${food.foodname}`} /></td>
 //                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }} >{food.foodname}</p></td>
 //                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }}>{food.description}</p></td>
 //                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }}>{food.price}</p></td>
@@ -92,7 +92,7 @@ function FoodTable() {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/getFood')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/getFood')
       .then((res) => {
         console.log("Data received:", res.data);
         setFoods(res.data.foods);
@@ -103,7 +103,7 @@ function FoodTable() {
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/deleteFood/${id}`)
+    axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteFood/${id}`)
       .then((res) => {
         console.log("Food deleted");
         setFoods(foods.filter(food => food._id !== id));
@@ -134,7 +134,7 @@ function FoodTable() {
           <tbody>
             {foods.map((food, index) => (
               <tr key={index}>
-                <td style={{ textTransform: 'uppercase' }}><img style={{ height: '100px', width: '100px', objectFit: 'contain', borderRadius: '0.5rem' }} src={`http://localhost:4000/${food.image}`} alt={`Food ${food.foodname}`} /></td>
+                <td style={{ textTransform: 'uppercase' }}><img style={{ height: '100px', width: '100px', objectFit: 'contain', borderRadius: '0.5rem' }} src={`https://food-ordering-app-wlwn.onrender.com/${food.image}`} alt={`Food ${food.foodname}`} /></td>
                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }}>{food.foodname}</p></td>
                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }}>{food.description}</p></td>
                 <td style={{ textTransform: 'uppercase', fontWeight: '550' }}><p style={{ fontSize: "13px" }}>{food.price}</p></td>

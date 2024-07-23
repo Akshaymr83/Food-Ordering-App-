@@ -9,7 +9,7 @@ function Chef() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:4000/getChef")
+    axios.get("https://food-ordering-app-wlwn.onrender.com/getChef")
       .then((res) => {
         console.log("Data received:", res.data);
         setChefs(res.data.chefs);
@@ -25,7 +25,7 @@ function Chef() {
         <div class="team_box">
         {chefs.map((chef, index) =>(
                  <div class="profile" key={index}>
-                 <img src={`http://localhost:4000/${chef.image}`} />
+                 <img src={`https://food-ordering-app-wlwn.onrender.com/${chef.image}`} />
  
                  <div class="info">
                      <h2 class="name">{chef.chefname}</h2>

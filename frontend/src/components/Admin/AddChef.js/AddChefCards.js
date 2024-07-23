@@ -15,7 +15,7 @@ function ChefCard() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:4000/getChef")
+    axios.get("https://food-ordering-app-wlwn.onrender.com/getChef")
       .then((res) => {
         console.log("Data received:", res.data);
         setChefs(res.data.chefs);
@@ -25,7 +25,7 @@ function ChefCard() {
       });
   }, []);
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:4000/deleteChef/${id}`)
+    axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteChef/${id}`)
       .then((res) => {
         console.log("Chefs deleted");
         // Update the state after deletion
@@ -54,7 +54,7 @@ function ChefCard() {
    
           <Card.Img  style={{height:'150px',objectFit:'contain'}} className='Img'
             variant="top"
-            src={`http://localhost:4000/${chef.image}`} // Assuming images are served from the root directory of the server
+            src={`https://food-ordering-app-wlwn.onrender.com/${chef.image}`} // Assuming images are served from the root directory of the server
             alt={`Chef ${chef.chef}`}
             
          

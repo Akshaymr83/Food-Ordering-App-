@@ -8,7 +8,7 @@ function PaymentDetails() {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/paymentDetails')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/paymentDetails')
       .then((res) => {
         setPayments(res.data.payments);
       })

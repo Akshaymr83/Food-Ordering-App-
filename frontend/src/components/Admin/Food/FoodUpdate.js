@@ -21,7 +21,7 @@
 //   const [categories, setCategories] = useState([]);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:4000/categoryName')
+//     axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
 //       .then((res) => {
 //         setCategories(res.data);
 //       })
@@ -29,7 +29,7 @@
 //   }, []);
 
 //   useEffect(() => {
-//     axios.get(`http://localhost:4000/getUserFood/${id}`)
+//     axios.get(`https://food-ordering-app-wlwn.onrender.com/getUserFood/${id}`)
 //       .then((res) => {
 //         const categoryData = res.data; // Assuming the response contains the department data
 //         setFoodName(categoryData.foodname);
@@ -76,7 +76,7 @@
 //     formData.append('category', category);
 //     formData.append('availabilty', availabilty);
   
-//     axios.put(`http://localhost:4000/updateFood/${id}`, formData)
+//     axios.put(`https://food-ordering-app-wlwn.onrender.com/updateFood/${id}`, formData)
 //       .then((res) => {
 //         console.log(res.data);
 //         alert("Success");
@@ -151,7 +151,7 @@ function FoodUpdate() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/getUserFood/${id}`)
+    axios.get(`https://food-ordering-app-wlwn.onrender.com/getUserFood/${id}`)
       .then((res) => {
         setFoodName(res.data.foodname);
         setDescription(res.data.description);
@@ -163,7 +163,7 @@ function FoodUpdate() {
   }, [id]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/categoryName')
+    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
       .then((res) => {
         setCategories(res.data);
       })
@@ -184,7 +184,7 @@ function FoodUpdate() {
         formData.append('image', image);
       }
 
-      await axios.put(`http://localhost:4000/updateFood/${id}`, formData);
+      await axios.put(`https://food-ordering-app-wlwn.onrender.com/updateFood/${id}`, formData);
       console.log('Food updated successfully');
       alert('Food updated successfully');
       navigate('/foodTable');

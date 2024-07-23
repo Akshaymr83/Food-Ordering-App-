@@ -15,7 +15,7 @@
 //     }
 
 //     if (userId) {
-//       axios.get(`http://localhost:4000/user/${userId}`)
+//       axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${userId}`)
 //         .then((res) => {
 //           setCartItems(res.data.userCollection);
 //         })
@@ -23,7 +23,7 @@
 //           console.error("Error fetching user data", err);
 //         });
 
-//       axios.get(`http://localhost:4000/cartData/${userId}`)
+//       axios.get(`https://food-ordering-app-wlwn.onrender.com/cartData/${userId}`)
 //         .then((res) => {
 //           setCartItems(res.data.cartItems);
 //         })
@@ -50,7 +50,7 @@
 //   }, [socket]);
 
 //   const handleStatusChange = (foodId, status) => {
-//     axios.post(`http://localhost:4000/updateOrderStatus/${userId}`, { foodId, status })
+//     axios.post(`https://food-ordering-app-wlwn.onrender.com/updateOrderStatus/${userId}`, { foodId, status })
 //       .then(() => {
 //         socket.emit('orderStatusUpdate', { userId, foodId, status });
 //         // Update order status in cartItems
@@ -87,7 +87,7 @@
 //               <td><b>{order.foodname}</b></td>
 //               <td><b>{order.price}</b></td>
 //               <td>
-//                 <img src={`http://localhost:4000/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+//                 <img src={`https://food-ordering-app-wlwn.onrender.com/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
 //               </td>
 //               <td>
 //                 <select
@@ -125,7 +125,7 @@ function AdminOrder({ userId, socket }) {
     }
 
     if (userId) {
-      axios.get(`http://localhost:4000/user/${userId}`)
+      axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${userId}`)
         .then((res) => {
           setUserName(res.data.name);
           setCartItems(res.data.userCollection);
@@ -134,7 +134,7 @@ function AdminOrder({ userId, socket }) {
           console.error("Error fetching user data", err);
         });
 
-      axios.get(`http://localhost:4000/cartData/${userId}`)
+      axios.get(`https://food-ordering-app-wlwn.onrender.com/cartData/${userId}`)
         .then((res) => {
           setCartItems(res.data.cartItems);
         })
@@ -161,7 +161,7 @@ function AdminOrder({ userId, socket }) {
   }, [socket]);
 
   const handleStatusChange = (foodId, status) => {
-    axios.post(`http://localhost:4000/updateOrderStatus/${userId}`, { foodId, status })
+    axios.post(`https://food-ordering-app-wlwn.onrender.com/updateOrderStatus/${userId}`, { foodId, status })
       .then(() => {
         socket.emit('orderStatusUpdate', { userId, foodId, status });
         // Update order status in cartItems
@@ -198,7 +198,7 @@ function AdminOrder({ userId, socket }) {
               <td><b>{order.foodname}</b></td>
               <td><b>{order.price}</b></td>
               <td>
-                <img src={`http://localhost:4000/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                <img src={`https://food-ordering-app-wlwn.onrender.com/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
               </td>
               <td>
                 <select

@@ -16,7 +16,7 @@ function NAV({ userId, cartItems }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/user/${id}`);
+        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
         const userData = response.data;
         console.log(userData);
         setcollection( userData.userCollection.length);
@@ -153,7 +153,7 @@ export default NAV;
 //   useEffect(() => {
 //     const fetchUserData = async () => {
 //       try {
-//         const response = await axios.get(`http://localhost:4000/user/${id}`);
+//         const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
 //         const userData = response.data;
 //         setCollection(userData.userCollection.length);
 //       } catch (error) {

@@ -18,7 +18,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:4000/login', user);
+      const response = await axios.post('https://food-ordering-app-wlwn.onrender.com/login', user);
       setLoading(false);
 
       // const userData = {
