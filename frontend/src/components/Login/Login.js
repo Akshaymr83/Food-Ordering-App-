@@ -56,7 +56,7 @@ const Login = () => {
       <div id="containerlogin" className="container-fluid d-flex justify-content-center align-items-center">
         {!loading && (
           <div id="blurbg" className="content-wrapper" style={{ display: 'flex', flexDirection: 'row', padding: '4rem', borderRadius: '1rem', marginTop: '10%', width: '380px', boxShadow: '4px 6px 10px 1.5px' }}>
-            <div>
+            <div className="login">
               <form className="loginform" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                 <h3 className="text-center" style={{ fontWeight: "600" }}>LOGIN</h3>
                 <br />

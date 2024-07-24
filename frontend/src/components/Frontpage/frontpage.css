@@ -190,6 +190,7 @@
 }
 
 @media screen and (max-width: 1000px) {
+ 
 
 .gallary__container {
   display: grid;
@@ -201,6 +202,7 @@
 }
 }
 @media (max-width: 992px) {
+ 
   
   .gallary__container {
     display: grid;
@@ -254,9 +256,10 @@
 }
 
 .menu .menu_box .menu_card {
-  width: 200px;
+   width: 240px;
+ height:350px;
   display: flex;
-  height: 100%;
+
   padding-top: 10px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -265,6 +268,7 @@
   align-items: center;
 
 }
+
 
 .menu_image {
   width: 200px;
@@ -347,16 +351,28 @@
   margin: 0 80px;
   transition: 0.3s;
 }
+
 @media screen and (max-width: 992px){
      
   .menu .menu_box {
     width: 100%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr  ;
     row-gap: 1rem;
    
   }
+  
+  .menu_card {
+  width: 200px;
+height:350px;
+
+}
+.containerr form {
+  padding: 20px;
+  width: 363px;
+}
+
  
 }
 
@@ -734,6 +750,7 @@
   .header__image img:nth-child(2) {
     max-width: 200px;
   }
+
 }
 
 @media (width < 900px) {
@@ -744,6 +761,7 @@
   .header__container {
     grid-template-columns: repeat(1, 1fr);
   }
+
 
   .header__image {
     min-height: 500px;
@@ -1012,8 +1030,13 @@ input:not(:placeholder-shown)~.reset {
   }
   .signupcontainer2{
     width: 300px;
-    margin-left: -40px;
+    margin-left: -90px;
+   
   }
+  #signupcontent-wrapper{
+    padding-top: 30%;
+  }
+
   .about-content {
     display: flex;
    flex-direction: column;
@@ -1029,6 +1052,13 @@ input:not(:placeholder-shown)~.reset {
   background: none;
 
   }
+#containerlogin{
+  margin-top: 6rem
+}
+ 
+
+
+
 
 }
 
@@ -1039,6 +1069,7 @@ input:not(:placeholder-shown)~.reset {
   .loginput{
     overflow: hidden;
   }
+  
  
 }
 
@@ -1054,6 +1085,8 @@ input:not(:placeholder-shown)~.reset {
     width: 10%; /* Full width of the container */
     height: auto; /* Maintain aspect ratio */
   }
+ 
+    
 }
 
 
