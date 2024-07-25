@@ -133,3 +133,36 @@
   color: rgb(18 238 18);
     font-weight: 600;
 }
+
+@media screen and (max-width: 400px){
+  .containerr form {
+    padding: 5rem 1rem 0 10rem;
+    width: 700px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 2);
+    border-radius: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  
+  .containerr form .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding-left: 0rem;
+    padding-right: 2rem;
+  }
+  .discount-buttons{
+    width:94%;
+    gap: 1rem;
+  }
+  .discount-buttons .discount-btn{
+   font-size: 9px;
+  }
+  .submit-btn{
+    margin-bottom: 1rem;
+  }
+}
+
+
+

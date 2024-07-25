@@ -172,8 +172,8 @@ function Ncart() {
             </button>
           </Link>
         
-        <div style={{display:"flex",justifyContent:'center',paddingTop:'30px'}}>
-          <div style={{background:'none',padding:'40px',border:'1px solid black',width:"50%",display:'flex',alignContent:'center',flexDirection:'column',borderRadius:'10px'}}>
+        <div className='policy2' >
+          <div className='policy' >
             <p><b>Review your order and address details to avoid cancellations</b></p>
 
 <p><span style={{color:"#fb2157"}}>Note:</span> If you cancel within 60 seconds of placing your order, a 100% refund will be issued.</p>
