@@ -69,7 +69,7 @@ const Signup = () => {
       <div className="signupcontainer d-flex justify-content-center align-items-center flex-wrap">
         <div className="content-wrapper" id="signupcontent-wrapper"  style={{width:'30%',marginTop:'6%'}}>
           <div id="blurbg" className="signupcontainer2 " style={{display:'flex',flexDirection:'column',padding:'2rem',borderRadius:'1rem',marginTop:'13%',boxShadow:'4px 6px 10px 1.5px',alignItems:'center'}}>
-            <form  style={{display:'flex',flexDirection:'column',alignItems:'center'}} >
+            <form  style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'2px'}} >
               <h3 className="text-center" style={{fontWeight:"600"}}>Register</h3>
               <br></br>
               <div className="form-group" >
