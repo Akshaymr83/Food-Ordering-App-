@@ -61,25 +61,28 @@ const server = http.createServer(app);
 
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND || 'http://localhost:3000', // Set the correct frontend URL
     methods: ['GET', 'POST'],
-    credentials: true,
+    credentials: true, // Allow credentials if needed
+    transports: ['websocket'], // Force WebSocket only, no polling
   }
 });
 
+// io.on('connection', (socket) => {
+//   console.log('New client connected');
 
-io.on('connection', (socket) => {
-  console.log('New client connected');
-  
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
+//   // Handle disconnect event
+//   socket.on('disconnect', () => {
+//     console.log('Client disconnected');
+//   });
 
-  socket.on('orderStatusUpdate', (data) => {
-    console.log('Order status updated:', data);
-    io.emit('orderStatusUpdate', data); // Broadcast to all clients
-  });
-});
+//   // Listen for 'orderStatusUpdate' from the client
+//   socket.on('orderStatusUpdate', (data) => {
+//     console.log('Order status updated:', data);
+//     // Broadcast order status update to all connected clients
+//     io.emit('orderStatusUpdate', data);
+//   });
+// });
 
  const url = process.env.MONGODBURL
 mongoose.connect(url)
@@ -625,6 +628,7 @@ app.post('/updateOrderStatus/:userId', async (req, res) => {
     user.userCollection[orderIndex].status = status;
     await user.save();
 
+    // Emit order status update event
     io.emit('orderStatusUpdate', { userId, foodId, status });
 
     res.status(200).json({ message: 'Order status updated successfully' });
@@ -637,12 +641,16 @@ app.post('/updateOrderStatus/:userId', async (req, res) => {
 io.on('connection', (socket) => {
   console.log('A user connected');
 
+  // Handle disconnect event
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
 
+  // Listen for 'orderStatusUpdate' from the client
   socket.on('orderStatusUpdate', (data) => {
-    io.to(data.userId).emit('statusUpdate', data);
+    // Send the update only to the client with a specific userId
+    io.to(data.userId).emit('statusUpdate', data);  // Make sure the userId corresponds to a room or client ID
+    console.log(`Order status updated for user ${data.userId}:`, data);
   });
 });
 

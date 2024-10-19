@@ -67,7 +67,7 @@ function Ncart() {
       // Delete item from backend
       const itemToDelete = cartItems.find(item => item.cartItemId === cartItemId);
       // await axios.delete(`https://food-ordering-app-wlwn.onrender.com/removeFromCart/${id}/${itemToDelete._id}`);
-      await axios.delete(`${process.env.REACT_APP_API_URL}/${id}/${itemToDelete._id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/removeFromCart/${id}/${itemToDelete._id}`);
      
       window.location.reload()
     

@@ -35,7 +35,7 @@ function OrderHistory() {
     return () => {
       socket.off('orderStatusUpdate');
     };
-  }, [id]);
+  }, [id ,socket]);
   const handleDelete = async (cartItemId) => {
     try {
       // Delete item from backend

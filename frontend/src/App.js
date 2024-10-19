@@ -35,11 +35,27 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const user = JSON.parse(localStorage.getItem('currentUser'));
-  useEffect(() => {
+ useEffect(() => {
     if (user) {
       setUserId(user._id);
     }
   }, [user]);
+
+  // Socket connection monitoring
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Socket connected:', socket.id);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected:', socket.id);
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+    };
+  }, [socket]);
 
   const addToCart = (food) => {
     setCartItems([...cartItems, food]);

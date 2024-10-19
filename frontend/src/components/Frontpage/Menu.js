@@ -12,7 +12,7 @@ function Menu({ selectedCategory, updateCart }) {
   const user = JSON.parse(localStorage.getItem('currentUser'));
 
   useEffect(() => {
-    axios.get("https://food-ordering-app-wlwn.onrender.com/getFood")
+    axios.get(`${process.env.REACT_APP_API_URL}/getFood`)
       .then((res) => {
         console.log("Data received:", res.data);
         setFoods(res.data.foods);
@@ -39,8 +39,8 @@ function Menu({ selectedCategory, updateCart }) {
 
     try {
       console.log("Adding food to cart:", food);
-      // const response = await axios.post(`https://food-ordering-app-wlwn.onrender.com/addToCart/${user._id}`, food);
       const response = await axios.post(`https://food-ordering-app-wlwn.onrender.com/addToCart/${user._id}`, food);
+      // const response = await axios.post(`${process.env.REACT_APP_API_URL}/${user._id}`, food);
       if (response.status === 200) {
         updateCart(food); // Notify parent component to update cart
         const updatedCartItems = [...cartItems, food];

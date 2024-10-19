@@ -29,7 +29,7 @@
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5",
+    "socket.io-client": "^4.8.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -55,7 +55,8 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ], "proxy": "https://food-ordering-app-wlwn.onrender.com"
+    ],
+    "proxy": "https://food-ordering-app-wlwn.onrender.com"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",

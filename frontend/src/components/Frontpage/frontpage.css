@@ -1065,6 +1065,8 @@ input:not(:placeholder-shown)~.reset {
   .signupcontainer2{
     width: 300px;
     margin-left: -90px;
+    position: absolute;
+    bottom: 6rem;
    
   }
   #signupcontent-wrapper{
@@ -1144,4 +1146,9 @@ input:not(:placeholder-shown)~.reset {
 
 
 
+@media screen and (max-width: 992px){
 
+  .table{
+    width: 30%;
+  }
+}
