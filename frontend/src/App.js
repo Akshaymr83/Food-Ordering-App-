@@ -27,7 +27,7 @@ import AdminOrder from './components/Admin/Order/Order.js';
 
 
 // const socket = io('https://food-ordering-app-wlwn.onrender.com');
-const socket = io(`${process.env.REACT_APP_API_URL}`); // Correct Socket.IO connection
+const socket = io('http://localhost:4000 '); // Correct Socket.IO connection
 
 function App() {
   const [cartItems, setCartItems] = useState([]);

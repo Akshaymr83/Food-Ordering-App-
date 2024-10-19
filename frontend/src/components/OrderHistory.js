@@ -10,7 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // const socket = io('https://food-ordering-app-wlwn.onrender.com');
-const socket = io(`${process.env.REACT_APP_API_URL}`);
+const socket = io('http://localhost:4000');
 
 function OrderHistory() {
   const [cartItems, setCartItems] = useState([]);

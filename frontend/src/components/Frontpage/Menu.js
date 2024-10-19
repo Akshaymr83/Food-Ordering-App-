@@ -39,6 +39,7 @@ function Menu({ selectedCategory, updateCart }) {
 
     try {
       console.log("Adding food to cart:", food);
+      // const response = await axios.post(`https://food-ordering-app-wlwn.onrender.com/addToCart/${user._id}`, food);
       const response = await axios.post(`https://food-ordering-app-wlwn.onrender.com/addToCart/${user._id}`, food);
       if (response.status === 200) {
         updateCart(food); // Notify parent component to update cart
