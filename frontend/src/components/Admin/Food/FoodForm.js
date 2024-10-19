@@ -324,7 +324,8 @@ const FoodForm = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    // axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    axios.get(`${process.env.REACT_APP_API_URL}/categoryName`)
       .then((res) => {
         setCategories(res.data);
       })
@@ -346,7 +347,9 @@ const FoodForm = () => {
       formDataToSend.append('category', formData.category);
       formDataToSend.append('availability', formData.availability);
 
-      await axios.post('https://food-ordering-app-wlwn.onrender.com/food', formDataToSend);
+      // await axios.post('https://food-ordering-app-wlwn.onrender.com/food', formDataToSend);
+      
+      await axios.post(`${process.env.REACT_APP_API_URL}/food`, formDataToSend);
       console.log('Food added successfully');
       alert('Food added successfully');
       navigate('/foodTable');

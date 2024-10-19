@@ -18,7 +18,10 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const response = await axios.post('https://food-ordering-app-wlwn.onrender.com/login', user);
+      // const response = await axios.post('https://food-ordering-app-wlwn.onrender.com/login', user);
+
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, user);
+
       setLoading(false);
 
       // const userData = {

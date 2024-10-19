@@ -31,7 +31,8 @@ function Payment() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        // const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`);
         const userData = response.data;
         setFormData(prevState => ({
           ...prevState,
@@ -65,10 +66,18 @@ function Payment() {
       alert('Fill all forms');
       return;
     }
+    // try {
+    //   setShowLoader(true);
+    //   await axios.post("https://food-ordering-app-wlwn.onrender.com/payment", { ...payData, total: discountedTotal });
+    //   const response = await axios.post("https://food-ordering-app-wlwn.onrender.com/orderPay", {
+    //     amount: discountedTotal, // Use the discounted total amount
+    //     currency: "INR", // Set the currency
+    //     receipt: "receipt#1", // Set the receipt ID
+    //   });
     try {
       setShowLoader(true);
-      await axios.post("https://food-ordering-app-wlwn.onrender.com/payment", { ...payData, total: discountedTotal });
-      const response = await axios.post("https://food-ordering-app-wlwn.onrender.com/orderPay", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/payment`, { ...payData, total: discountedTotal });
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/orderPay`, {
         amount: discountedTotal, // Use the discounted total amount
         currency: "INR", // Set the currency
         receipt: "receipt#1", // Set the receipt ID

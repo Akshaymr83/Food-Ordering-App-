@@ -19,7 +19,8 @@ function AdminNav({ userId, cartItems })  {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        // const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`);
         const userData = response.data;
         setFormData({
           ...formData,

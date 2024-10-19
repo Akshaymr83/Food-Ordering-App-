@@ -163,7 +163,8 @@ function FoodUpdate() {
   }, [id]);
 
   useEffect(() => {
-    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    // axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    axios.get(`${process.env.REACT_APP_API_URL}/categoryName`)
       .then((res) => {
         setCategories(res.data);
       })
@@ -184,7 +185,9 @@ function FoodUpdate() {
         formData.append('image', image);
       }
 
-      await axios.put(`https://food-ordering-app-wlwn.onrender.com/updateFood/${id}`, formData);
+      // await axios.put(`https://food-ordering-app-wlwn.onrender.com/updateFood/${id}`, formData);
+      
+      await axios.put(`${process.env.REACT_APP_API_URL}/updateFood/${id}`, formData);
       console.log('Food updated successfully');
       alert('Food updated successfully');
       navigate('/foodTable');

@@ -15,7 +15,8 @@ function ChefCard() {
 
 
   useEffect(() => {
-    axios.get("https://food-ordering-app-wlwn.onrender.com/getChef")
+    // axios.get("https://food-ordering-app-wlwn.onrender.com/getChef")
+    axios.get(`${process.env.REACT_APP_API_URL}/getChef`)
       .then((res) => {
         console.log("Data received:", res.data);
         setChefs(res.data.chefs);
@@ -25,7 +26,8 @@ function ChefCard() {
       });
   }, []);
   const handleDelete = (id) => {
-    axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteChef/${id}`)
+    // axios.delete(`https://food-ordering-app-wlwn.onrender.com/deleteChef/${id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/deleteChef/${id}`)
       .then((res) => {
         console.log("Chefs deleted");
         // Update the state after deletion
@@ -52,9 +54,16 @@ function ChefCard() {
       {Array.isArray(chefs) && chefs.map((chef, index) => (
         <Card className='dcard  text-center' key={index} >
    
-          <Card.Img  style={{height:'150px',objectFit:'contain'}} className='Img'
+          {/* <Card.Img  style={{height:'150px',objectFit:'contain'}} className='Img'
             variant="top"
             src={`https://food-ordering-app-wlwn.onrender.com/${chef.image}`} // Assuming images are served from the root directory of the server
+            alt={`Chef ${chef.chef}`}
+            
+         
+          /> */}
+              <Card.Img  style={{height:'150px',objectFit:'contain'}} className='Img'
+            variant="top"
+            src={`${process.env.REACT_APP_API_URL}/${chef.image}`} // Assuming images are served from the root directory of the server
             alt={`Chef ${chef.chef}`}
             
          

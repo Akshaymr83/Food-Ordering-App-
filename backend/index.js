@@ -48,13 +48,26 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 const server = http.createServer(app);
 
+// const io = socketIo(server, {
+//   cors: {
+//     origin: 'https://food-ordering-app-six-ivory.vercel.app/',
+    
+    
+//    methods: ['GET', 'POST']
+//   }
+// });
+
+
+
 const io = socketIo(server, {
   cors: {
-    origin: 'https://food-ordering-app-six-ivory.vercel.app/',
+    origin:process.env.REACT_APP_LOCAL_API ,
+    
     
    methods: ['GET', 'POST']
   }
 });
+
 
 io.on('connection', (socket) => {
   console.log('New client connected');

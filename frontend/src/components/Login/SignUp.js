@@ -35,7 +35,8 @@ const Signup = () => {
   
       try {
         setLoading(true);
-        const response = await axios.post('https://food-ordering-app-wlwn.onrender.com/register', user);
+        // const response = await axios.post('https://food-ordering-app-wlwn.onrender.com/register', user);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/register`, user);
         setLoading(false);
         setSuccess(true);
   

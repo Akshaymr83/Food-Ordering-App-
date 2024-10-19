@@ -293,7 +293,8 @@ function Frontpage() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
 
     useEffect(() => {
-        axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${user._id}`)
+        // axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${user._id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/${user._id}`)
             .then((res) => {
                 console.log("Cart data received:", res.data);
                 setCartItems(res.data.userCollection);

@@ -19,7 +19,8 @@ const ReviewForm = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        // const response = await axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`);
         const userData = response.data;
         setReviewFormData(prevState => ({
           ...prevState,
@@ -55,7 +56,8 @@ const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   
   useEffect(() => {
-    axios.get('https://food-ordering-app-wlwn.onrender.com/reviewName')
+    // axios.get('https://food-ordering-app-wlwn.onrender.com/reviewName')
+    axios.get(`${process.env.REACT_APP_API_URL}/reviewName`)
       .then((res) => {
         setReviews(res.data);
       })
@@ -70,7 +72,8 @@ const navigate = useNavigate();
     formDataToSend.append('description', formData.description);
   
     try {
-      await axios.post('https://food-ordering-app-wlwn.onrender.com/review', formDataToSend);
+      // await axios.post('https://food-ordering-app-wlwn.onrender.com/review', formDataToSend);
+      await axios.post(`${process.env.REACT_APP_API_URL}/review`, formDataToSend);
       console.log('Review added successfully');
       alert('Review added successfully');
       window.location.reload()

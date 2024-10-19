@@ -28,7 +28,8 @@ const navigate=useNavigate();
 
  
   useEffect(() => {
-    axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    // axios.get('https://food-ordering-app-wlwn.onrender.com/categoryName')
+    axios.get(`${process.env.REACT_APP_API_URL}/categoryName`)
       .then((res) => {
         setCategories(res.data);
       })
@@ -49,7 +50,8 @@ const navigate=useNavigate();
 
 
 
-      await axios.post('https://food-ordering-app-wlwn.onrender.com/category', formDataToSend);
+      // await axios.post('https://food-ordering-app-wlwn.onrender.com/category', formDataToSend);
+      await axios.post(`${process.env.REACT_APP_API_URL}/category`, formDataToSend);
       console.log('Category added successfully');
       alert('Category added successfully');
       navigate('/CategoryTable')

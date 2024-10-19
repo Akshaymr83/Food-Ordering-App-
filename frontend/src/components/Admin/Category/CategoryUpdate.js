@@ -14,7 +14,8 @@ function CategoryUpdate() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`https://food-ordering-app-wlwn.onrender.com/getProductCategory/${id}`)
+    // axios.get(`https://food-ordering-app-wlwn.onrender.com/getProductCategory/${id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/getProductCategory/${id}`)
       .then((res) => {
         const categoryData = res.data; // Assuming the response contains the department data
         setCategory(categoryData.category);
@@ -39,7 +40,8 @@ function CategoryUpdate() {
       return; // Exit early if any field is empty
     }
 
-    axios.put(`https://food-ordering-app-wlwn.onrender.com/updateCategory/${id}`, formData)
+    // axios.put(`https://food-ordering-app-wlwn.onrender.com/updateCategory/${id}`, formData).
+    axios.put(`${process.env.REACT_APP_API_URL}/updateCategory/${id}`, formData)
       .then((res) => {
         console.log(res.data);
         alert("Success");

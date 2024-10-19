@@ -105,7 +105,8 @@ function Menu({ selectedCategory, updateCart }) {
             {filteredFoods.map((food, index) => (
               <div className="menu_card" key={index}>
                 <div className="menu_image">
-                  <img src={`https://food-ordering-app-wlwn.onrender.com/${food.image}`} alt={`Food ${food.foodname}`} />
+                  {/* <img src={`https://food-ordering-app-wlwn.onrender.com/${food.image}`} alt={`Food ${food.foodname}`} /> */}
+                  <img src={`${process.env.REACT_APP_API_URL}/${food.image}`} alt={`Food ${food.foodname}`} />
                   <div className='info' style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <p style={{ overflow: 'hidden', textOverflow: 'ellipsis' ,padding:'0',margin:'0'}}><b>{food.foodname}</b></p>
                     <p style={{ fontSize: '11px',padding:'0',margin:'0' }}>{food.description}</p>

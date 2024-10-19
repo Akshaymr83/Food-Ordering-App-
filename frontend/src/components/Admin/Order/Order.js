@@ -125,7 +125,8 @@ function AdminOrder({ userId, socket }) {
     }
 
     if (userId) {
-      axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${userId}`)
+      // axios.get(`https://food-ordering-app-wlwn.onrender.com/user/${userId}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/user/${userId}`)
         .then((res) => {
           setUserName(res.data.name);
           setCartItems(res.data.userCollection);
@@ -134,7 +135,8 @@ function AdminOrder({ userId, socket }) {
           console.error("Error fetching user data", err);
         });
 
-      axios.get(`https://food-ordering-app-wlwn.onrender.com/cartData/${userId}`)
+      // axios.get(`https://food-ordering-app-wlwn.onrender.com/cartData/${userId}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/cartData/${userId}`)
         .then((res) => {
           setCartItems(res.data.cartItems);
         })
@@ -161,7 +163,8 @@ function AdminOrder({ userId, socket }) {
   }, [socket]);
 
   const handleStatusChange = (foodId, status) => {
-    axios.post(`https://food-ordering-app-wlwn.onrender.com/updateOrderStatus/${userId}`, { foodId, status })
+    // axios.post(`https://food-ordering-app-wlwn.onrender.com/updateOrderStatus/${userId}`, { foodId, status })
+    axios.post(`${process.env.REACT_APP_API_URL}/updateOrderStatus/${userId}`, { foodId, status })
       .then(() => {
         socket.emit('orderStatusUpdate', { userId, foodId, status });
         // Update order status in cartItems
@@ -198,7 +201,8 @@ function AdminOrder({ userId, socket }) {
               <td><b>{order.foodname}</b></td>
               <td><b>{order.price}</b></td>
               <td>
-                <img src={`https://food-ordering-app-wlwn.onrender.com/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
+                {/* <img src={`https://food-ordering-app-wlwn.onrender.com/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} /> */}
+                <img src={`${process.env.REACT_APP_API_URL}/${order.image}`} alt={order.foodname} style={{ width: '100px', height: '100px', objectFit: 'contain' }} />
               </td>
               <td>
                 <select
