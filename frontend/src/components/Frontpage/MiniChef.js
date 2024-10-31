@@ -20,7 +20,7 @@ const MiniChef = () => {
     // Automatically close after 4 seconds
     const closeTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 700000);
+    }, 8000);
 
     return () => {
       clearTimeout(textTimer);
