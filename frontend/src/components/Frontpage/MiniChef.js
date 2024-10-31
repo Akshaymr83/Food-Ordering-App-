@@ -1,41 +1,40 @@
-// MiniChef.js
+
 import React, { useState, useEffect } from 'react';
-import './MiniChef.css'; // Import the CSS file for styling
-import miniChefImg from '../Images/MiniChef1.jpg'; // Path to your miniature chef image
+import './MiniChef.css'; // CSS for styling
+import boyImage from '../Images/boy.png'; // Path to your boy image
 
 const MiniChef = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [messages, setMessages] = useState([
-    'Welcome to FOOD MOOD',
-    'Explore our delicious menu!',
-    'Place your order and enjoy!'
-  ]);
+  const [showText, setShowText] = useState(false);
 
   const handleClose = () => {
     setIsVisible(false);
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, (messages.length + 1) * 3000); // Automatically close after all messages are displayed
+    // Show the text after the image slides into place
+    const textTimer = setTimeout(() => {
+      setShowText(true);
+    }, 2000); // Delay for text to fade in after image
 
-    return () => clearTimeout(timer);
-  }, [messages]);
+    // Automatically close after 4 seconds
+    const closeTimer = setTimeout(() => {
+      setIsVisible(false);
+    }, 700000);
+
+    return () => {
+      clearTimeout(textTimer);
+      clearTimeout(closeTimer);
+    };
+  }, []);
 
   return (
     isVisible && (
-      <div className="mini-chef">
+      <div className="mini-chef-overlay">
         <button className="close-button" onClick={handleClose}>&times;</button>
         <div className="mini-chef__content">
-          <img src={miniChefImg} alt="Mini Chef" className="mini-chef__img" />
-          <div className="mini-chef__speech-container">
-            {messages.map((message, index) => (
-              <div key={index} className="mini-chef__speech-bubble">
-                {message}
-              </div>
-            ))}
-          </div>
+          <img src={boyImage} alt="Boy" className="mini-chef__img" />
+          {showText && <div className="mini-chef__welcome-text"><h3 id='welcome'>WELCOME TO</h3> <h1 className='foodmood'>FOOD <span id='mood'>MOOD </span></h1></div>}
         </div>
       </div>
     )

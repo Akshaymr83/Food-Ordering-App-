@@ -1,122 +1,173 @@
 /* MiniChef.css */
-.mini-chef {
-    position: fixed;
-    top: 0;
-    right: -300px; /* Start position outside the view */
-    width: 300px;
-    height: 100%;
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: slideIn 1s forwards;
-    z-index: 1000;
-  }
-  
-  .mini-chef__content {
-    margin-top: 125px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .mini-chef__img {
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  /* .mini-chef__speech-bubble {
-    padding: 10px;
-    background-color: #fb2157;
-    border-radius: 10px;
-    font-size: 14px;
-    color: rgb(255, 255, 255);
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    
-  } */
-  
-  .close-button {
-    background: none;
-    border: none;
-    font-size: 38px;
-    cursor: pointer;
-    color: #323232;
-    position: absolute;
-    top: 30px;
-    right: 10px;
-    background-color: white;
-    border-radius: 50%;
-    padding: 5px;
-    margin-top: 70px;
-  }
-  
-  @keyframes slideIn {
-    0% {
-      right: -300px; /* Start position outside the view */
-    }
-    100% {
-      right: 0; /* End position */
-    }
-  }
-  .mini-chef {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    animation: slideInFromBottom 0.5s ease-out;
-    animation-fill-mode: both;
-  }
-  
-  .mini-chef__content {
-    display: flex;
-    align-items: center;
-  }
-  
-  .mini-chef__img {
-    width: 250px;
-    height: 250px;
+.mini-chef-overlay {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
-    margin-right: 10px;
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.mini-chef__content {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mini-chef__img {
+  width: 500px;
+  animation: slideUp 0.8s ease-out, slideLeft 6s ease-out 1s;
+  position: relative;
+}
+
+.mini-chef__welcome-text {
+  margin-left: 20px;
+  color: white;
+  font-size: 3rem;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards 1s; /* Fade in after image slides left */
+}
+
+.foodmood {
+  font-size: 6rem;
+  color: rgb(255, 211, 36);
+  font-weight: 800;
+}
+
+#mood {
+  font-weight: 800;
+  color: rgb(238, 114, 6);
+}
+
+#welcome {
+  font-weight: 600;
+  font-size: 4rem;
+  text-align: center;
+}
+
+/* Keyframes for animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
   }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-200px); /* Slide to the left */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Styles */
+
+/* Tablets */
+@media (max-width: 768px) {
   
-  .mini-chef__speech-container {
+  .mini-chef__content {
+
     display: flex;
+    align-items: center;
     flex-direction: column;
+}
+  .mini-chef__img {
+    width: 300px; /* Reduce image size */
   }
-  
-  .mini-chef__speech-bubble {
-    background-color: #fb2157;
-    color: #fff;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    max-width: 300px;
-    word-wrap: break-word;
-    animation: fadeIn 0.5s ease-in-out;
-    animation-fill-mode: both;
+
+  .mini-chef__welcome-text {
+    font-size: 2rem; /* Adjust font size */
   }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+
+  .foodmood {
+    font-size: 4rem;
   }
-  
-  @keyframes slideInFromBottom {
-    0% {
-      transform: translateY(100%);
+
+  #mood {
+    font-size: 4rem;
+  }
+
+  #welcome {
+    font-size: 3rem;
+  }
+
+  .close-button {
+    font-size: 32px; /* Reduce close button size */
+  }
+  @keyframes slideLeft {
+    from {
+      transform: translateX(0);
     }
-    100% {
-      transform: translateY(0);
+    to {
+      transform: translateX(-30px); /* Slide to the left */
     }
   }
-  
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .mini-chef__img {
+    width: 200px; /* Further reduce image size */
+  }
+
+  .mini-chef__content {
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+  .foodmood {
+    font-size: 3rem;
+  }
+
+  #mood {
+    font-size: 2rem;
+  }
+
+  #welcome {
+    font-size: 2rem;
+  }
+
+  .close-button {
+    font-size: 28px; /* Further reduce close button size */
+  }
+  @keyframes slideLeft {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-30px); /* Slide to the left */
+    }
+  }
+}
