@@ -267,6 +267,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { driver } from 'driver.js';
+import 'driver.js/dist/driver.css';
 
 import NAV from '../Navbar/NAV';
 import Menu from './Menu';
@@ -320,7 +322,64 @@ function Frontpage() {
         setCartItems([...cartItems, food]);
     };
 
-  
+    const startTour = () => {
+        // Check if the tour has been shown before
+        const tourShown = localStorage.getItem('tourShown');
+
+        if (!tourShown) { // Only start the tour if it hasn't been shown
+            const driverObj = driver({
+                showProgress: true,
+                steps: [
+                    {
+                        element: '#home',
+                        popover: {
+                            title: 'Welcome to FOOD MOOD!',
+                            description: 'This is the place to find the best food.',
+                            position: 'bottom',
+                        },
+                    },
+                    {
+                        element: '#about',
+                        popover: {
+                            title: 'About Us',
+                            description: 'Learn more about our culinary journey!',
+                            position: 'top',
+                        },
+                    },
+                    {
+                        element: '.gallary__content',
+                        popover: {
+                            title: 'Meet Our Chefs!',
+                            description: 'Discover the amazing chefs behind our dishes.',
+                            position: 'top',
+                        },
+                    },
+                    {
+                        element: '.menu',
+                        popover: {
+                            title: 'View Our Menu',
+                            description: 'Explore our delicious food offerings!',
+                            position: 'right',
+                        },
+                    },
+                    {
+                        popover: {
+                            title: 'Happy Coding',
+                            description: 'And that is all, go ahead and start adding tours to your applications.',
+                        },
+                    },
+                ]
+            });
+            driverObj.drive(); // Start the tour
+
+            // Set tourShown in local storage so it doesn't show again
+            localStorage.setItem('tourShown', 'true');
+        }
+    };
+
+    useEffect(() => {
+        startTour();
+    }, []); // Automatically start the tour on component mount
 
     return (
         <div className='FRONTPAGE'>
