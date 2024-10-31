@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './NAV.css';
+import Loader from '../Loader/Loader';
 
 function NAV({ userId, cartItems }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -13,6 +14,7 @@ function NAV({ userId, cartItems }) {
   const { id } = useParams();
   const [collections,setcollection]=useState(0)
   const navigate = useNavigate()
+  const [loading ,setLoading] =useState()
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -54,7 +56,13 @@ function NAV({ userId, cartItems }) {
     const confirmLogout = window.confirm("Do you want to exit the website?");
 
     if (confirmLogout) {
-      navigate("/login");
+      setLoading(true); // Show loader when logout is confirmed
+
+      // Set a timeout to navigate after 2 seconds
+      setTimeout(() => {
+        setLoading(false); // Hide loader after 2 seconds
+        navigate("/login"); // Navigate to login
+      }, 2000);
     }
   };
 
@@ -63,6 +71,9 @@ function NAV({ userId, cartItems }) {
   };
 
   return (
+    <>
+    {loading && <Loader />} 
+    
     
     <nav className="navbar navbar-expand-lg navbar-light  fixed-top" style={{ height: '73px' ,width:'100%' }}>
     <div className="container-fluid" style={{background:"white",height:'73px'}}>
@@ -131,6 +142,7 @@ function NAV({ userId, cartItems }) {
         </div>
       )}
     </nav>
+    </>
   );
 }
 

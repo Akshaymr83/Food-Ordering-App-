@@ -59,30 +59,39 @@ const server = http.createServer(app);
 
 
 
+// const io = socketIo(server, {
+//   cors: {
+//     origin: process.env.FRONTEND || 'http://localhost:3000', // Set the correct frontend URL
+//     methods: ['GET', 'POST'],
+//     credentials: true, // Allow credentials if needed
+//     transports: ['websocket'], // Force WebSocket only, no polling
+//   }
+// });
+
+
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND || 'http://localhost:3000', // Set the correct frontend URL
-    methods: ['GET', 'POST'],
-    credentials: true, // Allow credentials if needed
-    transports: ['websocket'], // Force WebSocket only, no polling
+    origin: "*", // Adjust origin based on deployment environment
+    methods: ["GET", "POST"]
   }
 });
 
-// io.on('connection', (socket) => {
-//   console.log('New client connected');
+app.use(express.json());
 
-//   // Handle disconnect event
-//   socket.on('disconnect', () => {
-//     console.log('Client disconnected');
-//   });
+// Define Socket.io connection
+io.on('connection', (socket) => {
+  console.log('New client connected');
+  
+  socket.on('joinRoom', (userId) => {
+    socket.join(userId);  // Join room specific to the userId
+    console.log(`User with ID ${userId} joined room`);
+  });
 
-//   // Listen for 'orderStatusUpdate' from the client
-//   socket.on('orderStatusUpdate', (data) => {
-//     console.log('Order status updated:', data);
-//     // Broadcast order status update to all connected clients
-//     io.emit('orderStatusUpdate', data);
-//   });
-// });
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
+
 
  const url = process.env.MONGODBURL
 mongoose.connect(url)
@@ -610,6 +619,52 @@ app.get('/orderHistory', async (req, res) => {
 });
 
 
+// app.post('/updateOrderStatus/:userId', async (req, res) => {
+//   const { userId } = req.params;
+//   const { foodId, status } = req.body;
+
+//   try {
+//     const user = await userModel.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     const orderIndex = user.userCollection.findIndex(order => order._id.toString() === foodId);
+//     if (orderIndex === -1) {
+//       return res.status(404).json({ message: 'Order not found' });
+//     }
+
+//     user.userCollection[orderIndex].status = status;
+//     await user.save();
+
+//     // Emit order status update event
+//     io.emit('orderStatusUpdate', { userId, foodId, status });
+
+//     res.status(200).json({ message: 'Order status updated successfully' });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
+
+// WebSocket connection handling
+// io.on('connection', (socket) => {
+//   console.log('A user connected:', socket.id);
+
+//   // Listen for order status updates from AdminOrder component
+//   socket.on('updateOrderStatus', (data) => {
+//     // Broadcast the update to all connected clients
+//     io.emit('orderStatusUpdate', data);
+//   });
+
+//   socket.on('disconnect', () => {
+//     console.log('User disconnected:', socket.id);
+//   });
+// });
+
+
+
+
+// Define API endpoint to emit event
 app.post('/updateOrderStatus/:userId', async (req, res) => {
   const { userId } = req.params;
   const { foodId, status } = req.body;
@@ -628,31 +683,14 @@ app.post('/updateOrderStatus/:userId', async (req, res) => {
     user.userCollection[orderIndex].status = status;
     await user.save();
 
-    // Emit order status update event
-    io.emit('orderStatusUpdate', { userId, foodId, status });
-
+    // Emit event to the user's specific room
+    io.to(userId).emit('orderStatusUpdate', { userId, foodId, status });
     res.status(200).json({ message: 'Order status updated successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// WebSocket connection handling
-io.on('connection', (socket) => {
-  console.log('A user connected');
-
-  // Handle disconnect event
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-
-  // Listen for 'orderStatusUpdate' from the client
-  socket.on('orderStatusUpdate', (data) => {
-    // Send the update only to the client with a specific userId
-    io.to(data.userId).emit('statusUpdate', data);  // Make sure the userId corresponds to a room or client ID
-    console.log(`Order status updated for user ${data.userId}:`, data);
-  });
-});
 
 
 ///////////////////////////////////////////////////////
