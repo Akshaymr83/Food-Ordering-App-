@@ -149,7 +149,7 @@ function Payment() {
         {showLoader ? (
           <div className="loader-container" style={{ textAlign: 'center', marginTop: '2rem' }}>
             <div className="loader" style={{ border: '16px solid #f3f3f3', borderTop: '16px solid #3498db', borderRadius: '50%', width: '120px', height: '120px', animation: 'spin 2s linear infinite', margin: 'auto' }}></div>
-            <p style={{ marginTop: '1rem', color: '#333', fontSize: '1.2rem', fontWeight: 'bold' }}>Processing Payment...</p>
+           
           </div>
         ) : paymentSuccess ? (
           <div className="success-message" style={{ textAlign: 'center', marginTop: '2rem' }}>
